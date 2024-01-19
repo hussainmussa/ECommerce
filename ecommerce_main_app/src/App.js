@@ -1,22 +1,31 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [selectedRole, setSelectedRole] = useState(null);
+
+  const handleRoleSelection = (role) => {
+    setSelectedRole(role);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Welcome to Our Website!</h1>
+        <p>Please select your role:</p>
+
+        <div>
+          <button onClick={() => handleRoleSelection('customer')}>
+            Customer
+          </button>
+          <button onClick={() => handleRoleSelection('seller')}>
+            Seller
+          </button>
+        </div>
+
+        {selectedRole && (
+          <p>You have selected: {selectedRole}</p>
+        )}
       </header>
     </div>
   );

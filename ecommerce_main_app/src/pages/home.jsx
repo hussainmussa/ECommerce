@@ -16,6 +16,9 @@ export default function Home() {
         };
         try{
             addDoc(ref,data)
+            messageRef.current.value = "";
+
+            
         }
         catch{
             console.log(e);

@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import firebase from './firebase/firebase';
+import React from "react";
+import './App.css'
+import Home from "./pages/home"
 
 
 function App() {
@@ -45,29 +46,14 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Welcome to Our Website!</h1>
-        <p>Please select your role:</p>
 
-        <div>
-          <button onClick={() => handleRoleSelection('customer')}>
-            Customer
-          </button>
-          <button onClick={() => handleRoleSelection('seller')}>
-            Seller
-          </button>
-        </div>
+        
+        <Home />
+         
 
-        {customerCount > 0 && (
-          <p>Customer Count: {customerCount}</p>
-        )}
-
-        {sellerCount > 0 && (
-          <p>Seller Count: {sellerCount}</p>
-        )}
       </header>
     </div>
   );
 }
-
 export default App;
 

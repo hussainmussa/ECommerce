@@ -27,12 +27,12 @@ const ShowData = () => {
   
     return (
       <div className="data-container">
-        <h2>Data from Firestore:</h2>
+        <h2></h2>
         {data.map((item) => (
           <div key={item.id} className="data-card">
-            <strong>ID:</strong> {item.id} <br />
-            <strong>PhoneNumber:</strong> {item.phonenumber} <br />
-            <strong>FullName:</strong> {item.fullname} <br />
+            {/* Exclude ID from being displayed */}
+            <strong>Phone Number:</strong> {item.phonenumber} <br />
+            <strong>Full Name:</strong> {item.fullname} <br />
             <strong>City:</strong> {item.city} <br />
             <strong>Job:</strong> {item.jobfield} <br />
           </div>

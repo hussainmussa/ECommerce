@@ -1,33 +1,47 @@
 /* Customer.css */
-.customer-container {
-    background-color: #f0f0f0;
+
+/* Define color and size variables */
+:root {
+    --main-bg-color: #f0f0f0;         /* Main background color */
+    --box-shadow-color: rgba(0, 0, 0, 0.1); /* Box shadow color */
+    --header-bg-color: #fff;           /* Header background color (white) */
+    --header-text-color: #000;         /* Header text color (black) */
+    --button-bg-color: #4caf50;       /* Button background color */
+    --button-hover-bg-color: #45a049; /* Button hover background color */
+    --logo-width: 50px;               /* Width of the logo */
+    --search-bar-bg: #fff;            /* Background color of the search bar */
+    --search-bar-placeholder: #888;   /* Placeholder color of the search bar */
+  }
+  
+  .customer-container {
+    background-color: var(--main-bg-color);
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 20px var(--box-shadow-color);
     margin: 20px;
     text-align: center;
-}
-
-.form-field {
+  }
+  
+  .form-field {
     margin-bottom: 15px;
-}
-
-label {
+  }
+  
+  label {
     display: block;
     margin-bottom: 5px;
-}
-
-input {
+  }
+  
+  input {
     width: 100%;
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--main-bg-color);
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 16px;
-}
-
-button {
-    background-color: #4caf50;
+  }
+  
+  button {
+    background-color: var(--button-bg-color);
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -35,8 +49,69 @@ button {
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-}
+  }
+  
+  button:hover {
+    background-color: var(--button-hover-bg-color);
+  }
+  
+  .header {
+    background-color: var(--header-bg-color);
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--header-text-color);
+  }
+  
+  .logo {
+    width: var(--logo-width);
+  }
+  
+  .login-label {
+    margin-right: 20px;
+    color: var(--header-text-color);
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .login-label:hover {
+    text-decoration: underline;
+  }
+  
 
-button:hover {
-    background-color: #45a049;
-}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: var(--search-bar-bg);
+    border: 1px solid var(--main-bg-color);
+    border-radius: 4px;
+    padding: 8px;
+    margin-top: 20px; /* Adjusted margin to make it lower */
+    transition: margin-top 0.3s ease; /* Added animation to margin-top */
+  }
+  
+  .search-input {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 5px;
+    font-size: 16px;
+    color: var(--search-bar-placeholder);
+  }
+  
+
+  
+  .search-input {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 5px;
+    font-size: 16px;
+    color: var(--search-bar-placeholder);
+  }
+  
+  /* Add more styling as needed */
+  

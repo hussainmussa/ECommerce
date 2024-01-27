@@ -1,56 +1,79 @@
 // Customer.jsx
-import React, { useState } from "react";
-import { firestore } from "../firebase";
-import { addDoc, collection } from "@firebase/firestore";
-import './Customer.css'; // Import external CSS file
+import { Link } from "react-router-dom";
+import './Customer.css';
 import Data from "./ShowData";
+import logo from "../images/HandyManLogo.jpg";
+
+import React, { useEffect, useState } from "react";
+import { firestore } from "../firebase";
+import { collection, getDocs, query, where } from "@firebase/firestore";
 
 const Customer = () => {
-  const [inputFields, setInputFields] = useState([
-    { id: 1, label: "name", value: "" },
-    { id: 2, label: "email", value: "" },
-    { id: 3, label: "address", value: "" },
-    { id: 4, label: "phone", value: "" }
-  ]);
+    
+    const [data, setData] = useState([]);
+    const [searchCity, setSearchCity] = useState(""); // New state for the entered city
 
-  const ref = collection(firestore, "Customers");
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                // Modify the query to filter based on the entered city
+                const q = query(collection(firestore, "Contractors"), where("city", "==", searchCity));
+                const querySnapshot = await getDocs(q);
 
-  const handleSave = async (e) => {
-    e.preventDefault();
+                const newData = [];
+                querySnapshot.forEach((doc) => {
+                    newData.push({ id: doc.id, ...doc.data() });
+                });
 
-    let data = {};
+                setData(newData);
+            } catch (error) {
+                console.error(error);
+            }
+        };
 
-    inputFields.forEach((field) => {
-      data[field.label.toLowerCase()] = field.value;
-    });
+        fetchData();
+    }, [searchCity]); // Run the effect whenever the searchCity changes
 
-    try {
-      await addDoc(ref, data);
-      // Clear input fields after successful save
-      setInputFields(inputFields.map((field) => ({ ...field, value: "" })));
-    } catch (error) {
-      console.error(error);
-    }
-  };
+    return (
+      <div className="customer-container">
+        <div className="header">
+          <img src={logo} alt="Logo" className="logo" />
+          <h2>
+            Welcome 
+        
+          </h2>
+          <div className="login-label">
+            <Link to="/customerlogin">Login</Link>
+          </div>
+        </div>
+  
+        <h2>Data from Firestore:</h2>
 
-  const handleChange = (e, id) => {
-    const newInputFields = inputFields.map((field) =>
-      field.id === id ? { ...field, value: e.target.value } : field
+        {/* Search bar for entering the city */}
+        <input
+            type="text"
+            placeholder="Enter city"
+            value={searchCity}
+            onChange={(e) => setSearchCity(e.target.value)}
+        />
+
+        {data.map((item) => (
+            <div key={item.id} className="data-card">
+                
+                <strong>PhoneNumber:</strong> {item.phonenumber} <br />
+                <strong>FullName:</strong> {item.fullname} <br />
+                <strong>City:</strong> {item.city} <br />
+                <strong>Job:</strong> {item.jobfield} <br />
+            </div>
+        ))}
+        
+            
+  
+        {/* Add your customer-related content here */}
+      </div>
     );
-    setInputFields(newInputFields);
   };
+  
+  export default Customer;
 
-  return (
-    <div className="customer-container">
-      <h2>Welcome to the Customer Page!</h2>
-      <p>This is a basic customer page. Customize it based on your project's needs.</p>
-
-
-      <Data />
-
-      {/* Add your customer-related content here */}
-    </div>
-  );
-};
-
-export default Customer;
+  // ShowData.jsx

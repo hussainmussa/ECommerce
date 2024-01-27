@@ -1,6 +1,8 @@
+// ShowData.jsx
 import React, { useEffect, useState } from "react";
 import { firestore } from "../firebase";
 import { collection, getDocs } from "@firebase/firestore";
+import './ShowData.css'; // Import external CSS file
 
 const ShowData = () => {
     const [data, setData] = useState([]);
@@ -24,10 +26,10 @@ const ShowData = () => {
     }, []);
   
     return (
-      <div>
+      <div className="data-container">
         <h2>Data from Firestore:</h2>
         {data.map((item) => (
-          <div key={item.id} style={{ border: "1px solid #ccc", padding: "10px", margin: "10px" }}>
+          <div key={item.id} className="data-card">
             <strong>ID:</strong> {item.id} <br />
             <strong>PhoneNumber:</strong> {item.phonenumber} <br />
             <strong>FullName:</strong> {item.fullname} <br />
@@ -40,4 +42,3 @@ const ShowData = () => {
   };
   
   export default ShowData;
-  

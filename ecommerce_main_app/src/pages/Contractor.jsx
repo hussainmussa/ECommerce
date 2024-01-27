@@ -1,8 +1,10 @@
+// Contractor.jsx
 import React, { useRef, useState } from "react";
 import { firestore } from "../firebase";
 import { addDoc, collection } from "@firebase/firestore";
+import './Contractor.css'; // Import external CSS file
 
-const Contracter = () => {
+const Contractor = () => {
   const [inputFields, setInputFields] = useState([
     { id: 1, label: "phonenumber", value: "" },
     { id: 2, label: "city", value: "" },
@@ -38,13 +40,15 @@ const Contracter = () => {
   };
 
   return (
-    <div>
+    <div className="contractor-container">
+      <h2>Contractor Registration</h2>
       <form onSubmit={handleSave}>
         {inputFields.map((field) => (
-          <div key={field.id}>
-            <label> Enter {field.label} </label>
+          <div key={field.id} className="form-field">
+            <label htmlFor={field.label}>{field.label.charAt(0).toUpperCase() + field.label.slice(1)}</label>
             <input
               type="text"
+              id={field.label}
               value={field.value}
               onChange={(e) => handleChange(e, field.id)}
             />
@@ -56,4 +60,4 @@ const Contracter = () => {
   );
 };
 
-export default Contracter;
+export default Contractor;

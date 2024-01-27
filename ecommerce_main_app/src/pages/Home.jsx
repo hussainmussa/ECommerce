@@ -14,6 +14,9 @@ function Home() {
                 <Link to="/contractor" className="option">
                     Contractor
                 </Link>
+                <Link to="/ShowData" className="option">
+                    Data
+                </Link>
                 
             </div>
             

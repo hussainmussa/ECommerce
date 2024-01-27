@@ -4,10 +4,10 @@ import { addDoc, collection } from "@firebase/firestore";
 
 const Contracter = () => {
   const [inputFields, setInputFields] = useState([
-    { id: 1, label: "PhoneNumber", value: "" },
-    { id: 2, label: "Full Name", value: "" },
-    { id: 3, label: "Job Field", value: "" },
-    { id: 4, label: "City", value: "" }
+    { id: 1, label: "phonenumber", value: "" },
+    { id: 2, label: "city", value: "" },
+    { id: 3, label: "fullname", value: "" },
+    { id: 4, label: "jobfield", value: "" }
   ]);
 
   const ref = collection(firestore, "Contractors");

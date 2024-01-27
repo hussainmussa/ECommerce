@@ -4,7 +4,7 @@ import Data from "./ShowData"
 function cust() {
     return(
         <div>
-            <h2>Welcome to the Customer Page!</h2>
+            <h2>Welcome to the Customer Page!!</h2>
             <p>This is a basic customer page. Customize it based on your project's needs.</p>
 
 

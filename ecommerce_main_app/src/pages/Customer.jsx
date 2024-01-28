@@ -5,20 +5,21 @@ import { firestore } from "../firebase";
 import { collection, getDocs, query, where } from "@firebase/firestore";
 
 
+// ... (import statements)
+
 const Customer = () => {
     const [data, setData] = useState([]);
     const [cities, setCities] = useState([]);
-    const [fields, setFields] = useState([]); // New state for job fields
+    const [fields, setFields] = useState([]); 
     const [searchCity, setSearchCity] = useState("");
     const [searchField, setSearchField] = useState("");
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const q = query(collection(firestore, "Contractors"), where("city", "==", searchCity));
-                const querySnapshot = await getDocs(q);
-
+                const querySnapshot = await getDocs(collection(firestore, "Contractors"));
                 const newData = [];
+
                 querySnapshot.forEach((doc) => {
                     newData.push({ id: doc.id, ...doc.data() });
                 });
@@ -30,7 +31,7 @@ const Customer = () => {
         };
 
         fetchData();
-    }, [searchCity]);
+    }, []);
 
     useEffect(() => {
         const fetchCities = async () => {
@@ -49,7 +50,7 @@ const Customer = () => {
         };
 
         fetchCities();
-    }, [data]);
+    }, []);
 
     useEffect(() => {
         const fetchFields = async () => {
@@ -68,35 +69,34 @@ const Customer = () => {
         };
 
         fetchFields();
-    }, [data]);
+    }, []);
 
     useEffect(() => {
         const fetchContractors = async () => {
             try {
-                const q = query(
-                    collection(firestore, "Contractors"),
-                    where("city", "==", searchCity),
-                    where("jobfield", "==", searchField)
-                );
-                const querySnapshot = await getDocs(q);
-
-                const newData = [];
-                querySnapshot.forEach((doc) => {
-                    newData.push({ id: doc.id, ...doc.data() });
-                });
-
-                setData(newData);
+                const fullDataSnapshot = await getDocs(collection(firestore, "Contractors"));
+                const fullData = fullDataSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    
+                let filteredData = [...fullData]; // Copy all Contractors' data initially
+    
+                if (searchCity) {
+                    filteredData = filteredData.filter(item => item.city === searchCity);
+                }
+    
+                if (searchField) {
+                    filteredData = filteredData.filter(item => item.jobfield === searchField);
+                }
+    
+                setData(filteredData);
             } catch (error) {
                 console.error(error);
             }
         };
-
+    
         fetchContractors();
     }, [searchCity, searchField]);
+    
 
-    // ...
-
-// ...
 
 return (
   <div className="customer-container">

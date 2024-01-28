@@ -1,54 +1,201 @@
 /* Home.css */
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Poppins', sans-serif; /* Simplified font family for wider compatibility */
+    background-color: #19173D; /* Soft grey background for a lighter feel */
+    animation: fadeIn 0.8s ease-out forwards; /* Smoother fade-in animation */
+}
+
+.background {
+    display: flex; /* Enables flexbox */
+    flex-direction: column; /* Stacks children vertically */
+    align-items: center; /* Center-aligns the child elements horizontally */
+    justify-content: center; /* Centers content vertically, useful if there's extra space */
+    background: linear-gradient(to right, #19173D, #7B78AA);
+    width: 100%;
+    max-width: 1024px;
+    margin: 30px auto;
+    padding: 50px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* Keyframes for fade-in effect */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px); /* Slightly less movement for subtlety */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 60vh;
+    padding: 0 20px;
+    background-color: transparent; /* Make the container transparent */
 }
 
-.background {
-    background-color: #f0f0f0;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+.combined-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+    width : 35vh;
+    padding: 50px;
+    margin: 0px auto 0px;
+    max-width: 2048px;
+    /*background: linear-gradient(to right, #7B78AA, #19173d7c);*/
+    background:  #7c78d8d5;
+    border-radius: 15px;
     text-align: center;
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.534);
+    position: relative;
+    top: 300px; /* Moves the container 200px down from its original position */
 }
 
 .options-container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 30px;
+    flex-direction: column; /* This should already be correctly stacking options vertically */
+    align-items: center;
+    margin-top: -0px;
+}
+
+.welcome-text {
+    font-family: 'Raleway', sans-serif; /* Use Raleway font */
+    font-size: 48px; /* Adjusted size */
+    color: #ffffff;
+    text-align: center;
+    position: absolute; /* Positioning it absolutely */
+    top: 10%; /* Adjust as per requirement */
+    width: 100%;
+}
+
+.choice-text {
+    font-size: 20px;
+    color: #ffffff;
+    margin-bottom: 10px;
 }
 
 .option {
     text-decoration: none;
-    color: #333;
-    margin: 10px;
-    padding: 20px;
-    border-radius: 8px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    color: #ffffff;
+    margin: 15px 0;
+    padding: 20px; /* Increased padding */
+    border-radius: 10px;
+    background-color: #6dd5ed; /* Adjusted color to fit theme */
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    width: 80%; /* Wider buttons */
+    justify-content: center; /* Center content */
+}
+
+.contact-links {
+    font-size: 14px;
+    color: #fff;
+    margin-top: 350px;
+}
+
+.contact-links a {
+    color: #7B78AA; /* Link color */
+    text-decoration: none;
+}
+
+.contact-links a:hover {
+    text-decoration: underline;
+}
+
+.option {
+    text-decoration: none;
+    color: #ffffff; /* Light color for better contrast */
+    margin: 15px 0; /* Adjusted margin for better spacing */
+    padding: 15px;
+    border-radius: 10px; /* Slightly larger radius for consistency */
+    background-color: #19173D; /* Updated to a more vibrant, standard color */
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2); /* Added shadow for depth */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth transition for hover effects */
     display: flex;
-    align-items: center;
+    justify-content: start;
 }
 
 .option:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px); /* Slight lift effect on hover */
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3); /* Increased shadow on hover for depth */
 }
 
 .option-content {
     display: flex;
     align-items: center;
+    width: 100%;
 }
 
 .icon {
     font-size: 24px;
-    margin-right: 10px;
+    margin-right: 20px; /* Increased margin for better visual separation */
 }
 
 .label {
-    font-size: 18px;
+    font-size: 16px; /* Adjusted size for readability */
+    text-transform: none; /* Normal casing for better readability */
+    letter-spacing: normal; /* Removed letter spacing for standard appearance */
+    flex-grow: 1;
+}
+
+/* Flat UI Buttons */
+.button {
+    background-color: #28a745; /* Fresh green for a positive, actionable look */
+    color: #FFFFFF;
+    padding: 12px 25px; /* Adjusted padding for a balanced appearance */
+    border: none;
+    border-radius: 5px; /* Subtler radius for a modern look */
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px; /* Slight letter spacing for emphasis */
+    margin-top: 25px; /* Increased spacing for better separation from content */
+}
+
+.button:hover {
+    background-color: #218838; /* Slightly darker green on hover */
+}
+
+/* Flat UI Text Inputs */
+.input {
+    border: 2px solid #ffffff; /* Harmonized border color with the option blocks */
+    padding: 12px;
+    border-radius: 5px; /* Consistent border-radius with buttons */
+    margin: 12px 0;
+    width: calc(100% - 24px); /* Adjusted width for consistent padding */
+}
+
+.input:focus {
+    outline: none;
+    border-color: #28a745; /* Use button color for focus highlight */
+}
+
+.fixed-bottom-right {
+    position: fixed; /* Fixed position */
+    bottom: -100px; /* 10px from the bottom */
+    right: -300px; /* 10px from the right */
+    width: 500px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+    z-index: 1000; /* Ensure it's above other elements */
+    opacity: 0.3;
+}
+.fixed-top-left {
+    position: fixed; /* Fixed position */
+    top: 00px; /* 10px from the bottom */
+    left: -300px; /* 10px from the right */
+    width: 500px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+    z-index: 1000; /* Ensure it's above other elements */
+    opacity: 0.2;
 }

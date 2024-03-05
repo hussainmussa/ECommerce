@@ -1,0 +1,56 @@
+/* FILEPATH: /c:/Users/weamm/Documents/EC/ECommerce/ecommerce_main_app/src/pages/SearchPage.css */
+
+/* Search container */
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Search input */
+.search-input {
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Search button */
+.search-button {
+  margin-left: 10px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Search results */
+.search-results {
+  margin-top: 20px;
+}
+
+/* Search result item */
+.search-result {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+/* Search result title */
+.search-result-title {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* Search result description */
+.search-result-description {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #666;
+}

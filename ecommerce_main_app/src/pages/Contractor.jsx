@@ -2,14 +2,14 @@
 import React, { useRef, useState } from "react";
 import { firestore } from "../firebase";
 import { addDoc, collection } from "@firebase/firestore";
-import './Contractor.css'; // Import external CSS file
+import "./Contractor.css"; // Import external CSS file
 
 const Contractor = () => {
   const [inputFields, setInputFields] = useState([
     { id: 1, label: "phonenumber", value: "" },
     { id: 2, label: "city", value: "" },
     { id: 3, label: "fullname", value: "" },
-    { id: 4, label: "jobfield", value: "" }
+    { id: 4, label: "jobfield", value: "" },
   ]);
 
   const ref = collection(firestore, "Contractors");
@@ -45,7 +45,9 @@ const Contractor = () => {
       <form onSubmit={handleSave}>
         {inputFields.map((field) => (
           <div key={field.id} className="form-field">
-            <label htmlFor={field.label}>{field.label.charAt(0).toUpperCase() + field.label.slice(1)}</label>
+            <label htmlFor={field.label}>
+              {field.label.charAt(0).toUpperCase() + field.label.slice(1)}
+            </label>
             <input
               type="text"
               id={field.label}

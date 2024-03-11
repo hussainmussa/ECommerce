@@ -40,7 +40,7 @@ function Verification() {
   const navigate = useNavigate();
 
   const handleVerifyClick = () => {
-    navigate("/showData");
+    navigate("/ShowData");
   };
 
   return (
@@ -50,7 +50,7 @@ function Verification() {
           <div key={index} className={`element1`}>
             <input
               type="text"
-              className="input-field1"
+              className="input-field2"
               value={digit}
               onChange={(e) => handleInputChange(index, e.target.value)}
               onKeyDown={(e) => handleKeyDown(index, e)}

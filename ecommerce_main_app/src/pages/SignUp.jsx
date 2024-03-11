@@ -59,7 +59,7 @@ function SignUp() {
       ))}
       <div className="text-wrapper-2">Please fill the details</div>
       <button className="overlap" onClick={handleVerifyClick}>
-        <div className="text-wrapper-3">Verify</div>
+        <div className="text-wrapper-3">Sign up</div>
       </button>
     </div>
   );

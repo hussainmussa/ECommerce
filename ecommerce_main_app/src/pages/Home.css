@@ -28,7 +28,7 @@ button {
   height: 100vh; /* Use viewport height for height */
   margin: 0 auto;
   font-size: 0px;
-  background: linear-gradient(180deg, #000571, rgba(0, 5, 113, 0.48));
+  background: linear-gradient(180deg, #80859a, rgba(200, 177, 115, 0.499));
   overflow: hidden;
 }
 
@@ -91,7 +91,7 @@ button {
   height: 5%; /* Let the browser calculate the height */
   margin: 2vh auto; /* Use viewport height for top margin, auto for right and left to center the element */
   cursor: pointer;
-  background: rgba(0, 5, 113, 0.8);
+  background: #83793acc;
   border: none;
   z-index: 10;
   border-radius: 5vw; /* Use viewport width for border radius */

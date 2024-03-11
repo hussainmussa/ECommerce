@@ -1,45 +1,38 @@
 // Home.jsx
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './Home.css'; // Import external CSS file
-import glow from '../images/glow.png';
+import React from "react";
+import { Link } from "react-router-dom";
+import "./Home.css"; // Import external CSS file
 
 function Home() {
+  const Button = ({ text, emoji, linkTo }) => {
     return (
-        <>
-            <h1 className="welcome-text">Welcome</h1>
-            <div className="combined-container">
-                <div className="options-container">
-                <h2 className="choice-text">What brings you here today:</h2>
-                    <Link to="/customer" className="option">
-                        <div className="option-content">
-                            <span className="icon">👤</span>
-                            <span className="label">Customer</span>
-                            <span className="icon">👤</span>
-                        </div>
-                    </Link>
-                    <Link to="/contractor" className="option">
-                        <div className="option-content">
-                            <span className="icon">🛠️</span>
-                            <span className="label">Contractor</span>
-                            <span className="icon">🛠️</span>
-                        </div>
-                    </Link>
-                </div>
-
-            </div>
-
-            <h2>                
-                <div className="contact-links">
-                    <a href="/contact">Contact Us | Rate us</a>
-                </div>
-            </h2>
-
-            <img src={glow} alt="Description of Image" className="fixed-bottom-right" />
-            <img src={glow} alt="Description of Image" className="fixed-top-left" />
-        </>
-        
+      <button
+        className="rectangle"
+        onClick={() => linkTo && window.location.assign(linkTo)}
+      >
+        {emoji && <span className="user">{emoji}</span>}
+        <span className="sign-up">{text}</span>
+      </button>
     );
+  };
+
+  return (
+    <div className="main-container">
+      <span className="welcome">Welcome</span>
+      <span className="to-our-platform">To Our Platform</span>
+      <span className="please-sign-up">Please sign up </span>
+      <Button
+        text="Sign up"
+        emoji={<div className="arrow-right" />}
+        linkTo="/SignUp"
+      />
+      <span className="to-access-data">To access our data</span>
+      <Button text="Contractor" emoji="🛠️" linkTo="/contractor" />
+      <Button text="Data" emoji="📊" linkTo="/showdata" />
+    </div>
+  );
 }
 
 export default Home;
+
+//      <Button text="Customer" emoji="👤" linkTo="/customer" />

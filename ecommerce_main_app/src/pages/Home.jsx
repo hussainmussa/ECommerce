@@ -26,6 +26,12 @@ function Home() {
         emoji={<div className="arrow-right" />}
         linkTo="/SignUp"
       />
+      <span className="PhoneAuth">sign in  </span>
+      <Button
+        text="Sign in"
+        emoji={<div className="arrow-right" />}
+        linkTo="/PhoneAuth"
+      />
       <span className="to-access-data">To access our data</span>
       <Button text="Contractor" emoji="🛠️" linkTo="/contractor" />
       <Button text="Data" emoji="📊" linkTo="/showdata" />

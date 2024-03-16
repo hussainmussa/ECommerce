@@ -104,7 +104,10 @@ const ShowData = () => {
         {data
           .filter(
             (item) =>
-              (item["job field"]
+              (item["full name"]
+              .toLowerCase()
+              .includes(searchTerm.toLowerCase()) ||
+              item["job field"]
                 .toLowerCase()
                 .includes(searchTerm.toLowerCase()) ||
                 item["country"]
@@ -113,6 +116,7 @@ const ShowData = () => {
                 item["city"]
                   .toLowerCase()
                   .includes(searchTerm.toLowerCase())) &&
+               
               (selectedCountry === "" ||
                 item["country"].toLowerCase() ===
                   selectedCountry.toLowerCase()) &&

@@ -256,3 +256,11 @@ button {
   white-space: nowrap;
   z-index: 2;
 }
+
+.sign-out-button {
+  position: absolute;
+  top: 20px; /* Adjust top position */
+  left: 20px; /* Adjust left position */
+  padding: 5px 10px; /* Adjust padding for smaller button */
+  font-size: 14px; /* Adjust font size */
+}

@@ -1,9 +1,9 @@
-import { useState, Redirect } from "react";
+import { useState } from "react";
 import { auth } from "../firebase";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import OtpInput from "otp-input-react";
 import PhoneInput from "react-phone-input-2";
-
+import './PhoneAuth.css'; // Import your CSS file for styling
 
 const PhoneAuth = () => {
   const [otp, setOtp] = useState("");
@@ -12,7 +12,7 @@ const PhoneAuth = () => {
   const [showOTP, setShowOTP] = useState(false);
   const [user, setUser] = useState(null);
   const [showErrormsg, setshowErrormsg] = useState(false);
-
+  
   function onCaptchVerify() {
     window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
         'size': 'invisible',
@@ -32,8 +32,8 @@ const PhoneAuth = () => {
         .then((confirmationResult) => {
             setLoading(false);
             setShowOTP(true);
-        window.confirmationResult = confirmationResult;
-       
+            window.confirmationResult = confirmationResult;
+           
         }).catch((error) => {
             console.log(error);
             setLoading(false);
@@ -47,6 +47,8 @@ const PhoneAuth = () => {
         console.log(result);
         setUser(result.user);
         setLoading(false);
+        const phoneNumber = result.user.phoneNumber;
+        console.log("Phone number:", phoneNumber);
         window.location.href = '/home';
 
         
@@ -77,7 +79,7 @@ const PhoneAuth = () => {
                   otpType="number"
                   disabled={false}
                   autoFocus
-                  className="opt-container "
+                  className="opt-container"
                 ></OtpInput>
               <button onClick={onOTPVerify} disabled={loading}>
                 {loading ? 'Loading...' : 'Verify OTP'}
@@ -90,6 +92,7 @@ const PhoneAuth = () => {
 
               ):
               <>
+               
               </>
                 
               }

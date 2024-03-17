@@ -1,0 +1,21 @@
+.phone-auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .phone-auth-content {
+    text-align: center;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .opt-container {
+    margin-top: 20px;
+  }
+  
+  /* Add more styles as needed */
+  

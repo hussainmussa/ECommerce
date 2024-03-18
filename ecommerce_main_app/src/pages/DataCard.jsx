@@ -12,6 +12,9 @@ import { IoCall } from "react-icons/io5";
 import { useLocation } from "react-router-dom";
 import { FavoritesContext } from "../components/FavoritesContext";
 import BottomBar from "../components/BottomBar";
+import { firestore } from '../firebase'; // Import your Firestore instance
+import { collection, query, where, getDocs, doc, updateDoc, getDoc } from "firebase/firestore";
+import { useNavigate } from 'react-router-dom';
 
 async function StringToCordination(address) {
   const response = await axios.get(
@@ -23,21 +26,104 @@ async function StringToCordination(address) {
   } else {
     throw new Error("No results found");
   }
+  
 }
 
+
 function DataCard() {
+  const navigate = useNavigate(); // Declare navigate function
+
   const { addFavorite, removeFavorite } = React.useContext(FavoritesContext);
   const location = useLocation();
-  const { fullname, country, city, street, streetnumber, phonenumber, rating } =
-    location.state;
+  const { fullname, country, city, street, streetnumber, phonenumber, rating, documentIdd } = location.state;
+  
   const [locationCor, setLocationCor] = useState([0, 0]);
   const [isHeartFilled, setHeartFilled] = useState(false);
+  
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [editableFullname, setEditableFullname] = useState(fullname);
+  const [editableCountry, setEditableCountry] = useState(country);
+  const [editableCity, setEditableCity] = useState(city);
+  const [editableStreet, setEditableStreet] = useState(street);
+  const [editableStreetNumber, setEditableStreetNumber] = useState(streetnumber);
+  const [editableRating, setEditableRating] = useState(rating); 
+  
+  
+  
+  const fetchData = async (documentId) => {
+    const docRef = doc(firestore, "Contractors", documentId);
+    const docSnap = await getDoc(docRef);
+  
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      // Update your component's state with the fetched data
+      setEditableFullname(data.fullname); 
+      setEditableCountry(data.country || '');
+      setEditableCity(data.city || '');
+      setEditableStreet(data.street || '');
+      setEditableStreetNumber(data.streetnumber || '');
+      setEditableRating(data.rating || '');
+      // Add other fields as necessary
+      console.log("there is such document!");
+    } else {
+      console.log("No such document!");
+    }
+  };
 
   useEffect(() => {
     StringToCordination(city + " " + street + " " + streetnumber)
       .then((coords) => setLocationCor(coords))
-      .catch((err) => console.error(err));
+      .catch((err) => {console.error(err); console.log(city + street + streetnumber);});
   }, [city, street, streetnumber]);
+
+  useEffect(() => {
+    if (phonenumber === "+16505554567") {
+      setIsEditMode(true);
+    }
+  }, [phonenumber]);
+
+  const handleSave = async () => {
+    console.log("Document IDDDDDDDDDDDD:"); 
+      //Get query that fits the phone number
+    const contractorsRef = collection(firestore, "Contractors");
+    const q = query(contractorsRef, where("phonenumber", "==", "+16505554567"));
+    const querySnapshot = await getDocs(q);
+    //Change the doc
+    if (!querySnapshot.empty) {
+      const documentId = querySnapshot.docs[0].id; // Get the document ID
+      console.log("Document ID:", documentId); 
+    
+    const docRef = doc(firestore, 'Contractors', documentId);
+    
+      // Object to hold the updates
+      let updates = {};
+
+    // Check each field for changes and add to updates object if changed
+    if (fullname !== editableFullname) updates.fullname = editableFullname;
+    if (country !== editableCountry) updates.country = editableCountry;
+    if (city !== editableCity) updates.city = editableCity;
+    if (street !== editableStreet) updates.street = editableStreet;
+    if (streetnumber !== editableStreetNumber) updates.streetnumber = editableStreetNumber;
+    if (rating !== editableRating) updates.rating = editableRating;
+
+  // Check if updates object is not empty
+  if (Object.keys(updates).length > 0) {
+    try {
+      await updateDoc(docRef, updates);
+      console.log("Document successfully updated");
+      setIsEditMode(false); // Exit edit mode
+      fetchData(documentId);
+    } catch (error) {
+      console.error("Error updating document: ", error);
+    }
+         } else {
+      console.log("No changes detected, no update performed");
+       }
+      setIsEditMode(false); // Exit edit mode after saving
+      navigate('/ProfilePage');  
+      
+    }
+  };
 
   const handleHeartClick = () => {
     const contractor = {
@@ -64,8 +150,11 @@ function DataCard() {
   return (
     <div className="BG-container">
     <div className="mainContainer">
-      <t1 className="body">Job details</t1>
+      <span className="body">Job details</span>
       <div>
+        {isEditMode && (
+          <button onClick={handleSave}>Save</button>
+        )}
         <img src={myImage} alt="Job" className="jobImage" />
         <div className="icon-container">
           <button className="heart" onClick={handleHeartClick}>
@@ -77,18 +166,76 @@ function DataCard() {
         </div>
       </div>
       <pre className="jobDetails1">
-        Name: {fullname}
-        {"\n"}Country: {country}
-        {"\n"}City: {city}
-        {"\n"}Street: {street} {streetnumber}
-        {"\n"}Phone number: {phonenumber}
-        {"\n"}Rating: {rating} stars
-        {"\n"}
-        {"\n"}
-        {"\n"}
-        {"\n"}
+
+
+
+      <div className="info">
+  <div className="info-item">
+    {isEditMode ? (
+      <>
+        <label htmlFor="fullname">Name:</label>
+        <input
+          id="fullname"
+          value={editableFullname}
+          onChange={(e) => setEditableFullname(e.target.value)}
+        />
+      </>
+    ) : (
+      `Name: ${fullname}`
+    )}
+  </div>
+
+  <div className="info-item">
+    {isEditMode ? (
+      <>
+        <label htmlFor="country">Country:</label>
+        <input
+          id="country"
+          value={editableCountry}
+          onChange={(e) => setEditableCountry(e.target.value)}
+        />
+      </>
+    ) : (
+      `Country: ${country}`
+    )}
+  </div>
+
+  <div className="info-item">
+    {isEditMode ? (
+      <>
+        <label htmlFor="city">City:</label>
+        <input
+          id="city"
+          value={editableCity}
+          onChange={(e) => setEditableCity(e.target.value)}
+        />
+      </>
+    ) : (
+      `City: ${city}`
+    )}
+  </div>
+
+  <div className="info-item">
+    {isEditMode ? (
+      <>
+        <label htmlFor="street">Street:</label>
+        <input
+          id="street"
+          value={editableStreet}
+          onChange={(e) => setEditableStreet(e.target.value)}
+        />
+      </>
+    ) : (
+      `Street: ${street}`
+    )}
+      </div>
+
+        <div className="info-item">Phone number: {phonenumber}</div>
+      <div className="info-item">Rating: {rating} stars</div>
+      </div>
+
       </pre>
-      <p className="jobDetails">{services}</p>
+      {/*<p className="jobDetails">{services}</p>*/}
       <div className="MapsIconContainer">
         <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer">
           <img src={googleMapsIcon} alt="Google Maps" className="MapsIcon" />

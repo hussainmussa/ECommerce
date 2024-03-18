@@ -143,3 +143,31 @@ button {
   right: 20px; /* adjust as needed */
   display: flex;
 }
+
+.info {
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f9fa; /* Light background */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Soft shadow for depth */
+  max-width: 400px; /* Max width for the info container */
+  margin: auto; /* Center the container */
+}
+
+.info-item {
+  margin-bottom: 10px; /* Space between items */
+}
+
+.info-item label {
+  display: block; /* Ensure labels are block level for better alignment */
+  margin-bottom: 5px; /* Space between label and input */
+  font-weight: bold; /* Make labels bold */
+}
+
+.info-item input {
+  width: 100%; /* Full width inputs */
+  padding: 8px; /* Padding for input */
+  border: 1px solid #ccc; /* Border for inputs */
+  border-radius: 4px; /* Rounded corners for inputs */
+}

@@ -11,6 +11,7 @@ import { FaHeart } from "react-icons/fa";
 import { IoCall } from "react-icons/io5";
 import { useLocation } from "react-router-dom";
 import { FavoritesContext } from "../components/FavoritesContext";
+import BottomBar from "./BottomBar.jsx";
 
 async function StringToCordination(address) {
   const response = await axios.get(
@@ -81,6 +82,10 @@ function DataCard() {
         {"\n"}Street: {street} {streetnumber}
         {"\n"}Phone number: {phonenumber}
         {"\n"}Rating: {rating} stars
+        {"\n"}
+        {"\n"}
+        {"\n"}
+        {"\n"}
       </pre>
       <p className="jobDetails">{services}</p>
       <div className="MapsIconContainer">
@@ -94,6 +99,7 @@ function DataCard() {
           <img src={appleMapsIcon} alt="Apple Maps" className="MapsIcon" />
         </a>
       </div>
+      <BottomBar/>
     </div>
   );
 }

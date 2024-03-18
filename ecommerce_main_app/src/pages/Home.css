@@ -264,3 +264,72 @@ button {
   padding: 5px 10px; /* Adjust padding for smaller button */
   font-size: 14px; /* Adjust font size */
 }
+
+.title-search-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  margin-bottom: 0px;
+}
+
+.help-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 40px 0; /* Adjust margin as needed */
+}
+
+.line {
+  flex-grow: 1; /* Lines grow to fill space */
+  height: 1px;
+  background-color: #ffffff; /* Color of the line */
+  margin: 0 20px; /* Spacing between text and line */
+}
+
+.help-text {
+  white-space: nowrap;
+  padding: 0 10px; /* Adjust padding as needed */
+  color: #ffffff; /* Color of the text */
+  font-size: 14px; /* Adjust font-size as needed */
+  position: relative;
+  top: -1px; /* Ensures the text overlays the line correctly */
+  font-family: Inter, var(--default-font-family);
+  font-size: 4vw; /* Use viewport width for font size */
+  font-weight: 200;
+}
+
+
+.scroll-container {
+  display: flex;
+  flex-direction: column; /* Stack buttons vertically */
+  overflow-y: auto; /* Enable vertical scrolling */
+  height: 300px; /* Adjust to desired scroll area height */
+  margin: 20px 0; /* Vertical spacing */
+  padding: 10px; /* Padding inside the scroll container */
+  border-radius: 5px; /* Rounded corners for scroll container, if you still want rounded corners without border */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+
+.scroll-container::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari, and newer browsers that use webkit style references */
+}
+
+.scroll-button {
+  padding: 10px; /* Padding inside each button */
+  margin-bottom: 10px; /* Spacing between buttons */
+  background-color: #fff; /* Background color for buttons */
+  cursor: pointer;
+  border: 1px solid transparent; /* Makes borders invisible */
+  border-radius: 5px; /* Rounded corners for buttons */
+  color: #000; /* Set the text color to black */
+  font-family: Inter, var(--default-font-family);
+}
+
+
+/* Style the scrollbar for WebKit browsers */
+.scroll-container::-webkit-scrollbar {
+  display: none; /* This will hide the scrollbar in WebKit browsers */
+}

@@ -2,9 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { firestore } from "../firebase";
 import { collection, getDocs } from "@firebase/firestore";
 import "./ShowData.css"; // Import external CSS file
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation  } from "react-router-dom";
 import Select from "../components/Select";
 import Card from "../components/Card";
+import BottomBar from "./BottomBar";
 
 const ShowData = () => {
   const [selectedCountry, setSelectedCountry] = useState("");
@@ -14,7 +15,11 @@ const ShowData = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
+  const location = useLocation();
   useEffect(() => {
+    if (location.state?.searchTerm) {
+      setSearchTerm(location.state.searchTerm);
+    }
     const fetchData = async () => {
       try {
         const querySnapshot = await getDocs(
@@ -32,7 +37,7 @@ const ShowData = () => {
     };
 
     fetchData();
-  }, []);
+  }, [location.state?.searchTerm]);
 
   const handleClick = (item) => {
     navigate("/datacard", {
@@ -130,6 +135,7 @@ const ShowData = () => {
             <Card key={item.id} item={item} handleClick={handleClick} />
           ))}
       </div>
+      <BottomBar />
     </div>
   );
 };

@@ -1,0 +1,29 @@
+.profile-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  .profile-icon {
+    font-size: 48px;
+  }
+  
+  .profile-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 10px 0;
+  }
+  
+  .profile-info {
+    margin: 5px 0;
+    font-size: 16px;
+  }
+  
+  .profile-bio {
+    margin-top: 10px;
+    font-style: italic;
+  }
+  

@@ -9,6 +9,7 @@ import PhoneAuth from "./pages/PhoneAuth";
 import Verification from "./pages/Verification";
 import SearchPage from "./pages/SearchPage";
 import DataCard from "./pages/DataCard";
+import ProfilePage from "./pages/ProfilePage";
 import { FavoritesProvider } from "./components/FavoritesProvider";
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path="/Verification" element={<Verification />} />
           <Route path="/SearchPage" element={<SearchPage />} />
           <Route path="/DataCard" element={<DataCard />} />
+          <Route path="/ProfilePage" element={<ProfilePage />} />
         </Routes>
       </div>
     </FavoritesProvider>

@@ -1,3 +1,5 @@
 const services =
-  "Proven experience in carpentry or completion of an apprenticeship program. Familiarity with carpentry techniques and tools, including safe operation of power and hand tools. Ability to read and interpret blueprints, drawings, and sketches. Strong mathematical skills to perform accurate measurements and calculations. Excellent problem-solving abilities and attention to detail. Good physical condition and stamina, capable of lifting heavy materials and working in various conditions. Effective communication skills for collaborating with clients, contractors, and other tradespeople.";
+  "Skilled carpenter with apprenticeship training or equivalent experience."+ 
+  "Proficient in carpentry techniques, tool safety, blueprint interpretation, and accurate measurements. Strong problem-solving,"+ 
+  "mathematical, and detail-oriented skills. Physically capable and effective in communication with various stakeholders";
 export default services;

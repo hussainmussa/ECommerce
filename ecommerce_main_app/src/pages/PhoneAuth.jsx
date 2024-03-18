@@ -1,3 +1,4 @@
+// PhoneAuth.jsx
 import { useState } from "react";
 import { auth } from "../firebase";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
@@ -63,15 +64,15 @@ const PhoneAuth = () => {
   };
   
   return (
-    <div>
+    <div className="phone-auth-container">
       {user ? (
         <h2>Login Success</h2>
       ) : (
-        <div>
+        <div className="phone-auth-content"> 
           <h1>Welcome to CODE A PROGRAM</h1>
           {showOTP ? (
             <>
-              
+              <div className="phone-auth-content"> 
               <OtpInput
                   value={otp}
                   onChange={setOtp}
@@ -79,8 +80,8 @@ const PhoneAuth = () => {
                   otpType="number"
                   disabled={false}
                   autoFocus
-                  className="opt-container"
                 ></OtpInput>
+                </div>
               <button onClick={onOTPVerify} disabled={loading}>
                 {loading ? 'Loading...' : 'Verify OTP'}
               </button>
@@ -116,3 +117,5 @@ const PhoneAuth = () => {
   );
 };
 export default PhoneAuth;
+
+

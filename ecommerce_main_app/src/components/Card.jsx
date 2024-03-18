@@ -5,10 +5,10 @@ import myImage from "../images/HandyManBG.jpg";
 
 const Card = ({ item, handleClick }) => {
   const fields = [
-    { label: "Full Name", key: "full name" },
+    { label: "Full Name", key: "fullname" },
     { label: "Country", key: "country" },
     { label: "City", key: "city" },
-    { label: "Job", key: "job field" },
+    { label: "Job", key: "jobfield" },
   ];
 
   return (

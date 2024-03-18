@@ -42,19 +42,20 @@ const ShowData = () => {
   const handleClick = (item) => {
     navigate("/datacard", {
       state: {
-        fullname: item["full name"],
+        fullname: item["fullname"],
         country: item.country,
         city: item.city,
         street: item.street,
-        streetnumber: item["street number"],
-        phonenumber: item["phone number"],
+        streetnumber: item["streetnumber"],
+        phonenumber: item["phonenumber"],
+        documentIdd : item.id
       },
     });
   };
 
   const countries = [...new Set(data.map((item) => item.country))];
   const cities = [...new Set(data.map((item) => item.city))];
-  const jobFields = [...new Set(data.map((item) => item["job field"]))];
+  const jobFields = [...new Set(data.map((item) => item["jobfield"]))];
 
   const selects = [
     {
@@ -109,10 +110,10 @@ const ShowData = () => {
         {data
           .filter(
             (item) =>
-              (item["full name"]
+              (item["fullname"]
               .toLowerCase()
               .includes(searchTerm.toLowerCase()) ||
-              item["job field"]
+              item["jobfield"]
                 .toLowerCase()
                 .includes(searchTerm.toLowerCase()) ||
                 item["country"]
@@ -128,7 +129,7 @@ const ShowData = () => {
               (selectedCity === "" ||
                 item["city"].toLowerCase() === selectedCity.toLowerCase()) &&
               (selectedJobField === "" ||
-                item["job field"].toLowerCase() ===
+                item["jobfield"].toLowerCase() ===
                   selectedJobField.toLowerCase())
           )
           .map((item) => (

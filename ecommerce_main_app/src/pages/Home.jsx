@@ -1,15 +1,15 @@
 // Home.jsx
 import React, { useEffect, useState } from "react";
 import "./Home.css"; // Import external CSS file
-import { getAuth,signOut, onAuthStateChanged } from "firebase/auth";
-import BottomBar from "./BottomBar"; 
-import { useNavigate } from 'react-router-dom';
+import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
+import BottomBar from "./BottomBar";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const auth = getAuth();
   const [phoneNumber, setPhoneNumber] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
-  
+
   useEffect(() => {
     // Listen for changes in authentication state
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -32,62 +32,69 @@ function Home() {
       .then(() => {
         // Sign-out successful.
         console.log("Sign-out successful");
-        window.location.href = '/PhoneAuth';
+        window.location.href = "/PhoneAuth";
       })
       .catch((error) => {
         // An error happened.
         console.error("Error signing out:", error);
       });
   };
-  
-  const Button = ({ text, emoji, linkTo }) => {
+
+  const Button = ({ text, emoji, linkTo, onClick }) => {
     return (
       <button
         className="rectangle"
-        onClick={() => linkTo && window.location.assign(linkTo)}
+        onClick={onClick || (() => linkTo && window.location.assign(linkTo))}
       >
         {emoji && <span className="user">{emoji}</span>}
         <span className="sign-up">{text}</span>
       </button>
     );
   };
-
   const navigate = useNavigate();
 
   const buttonsContent = [
-    { text: "Electrician"},
-    { text: "Plumber"},
-    { text: "Mechanic"},
-    { text: "Marketing"},
-    { text: "Construction"},
-    { text: "Gardener"},
-    { text: "House Cleaner"},
-    { text: "Painter"},
-    { text: "Roofer"},
-    { text: "Locksmith"}
+    { text: "Electrician" },
+    { text: "Plumber" },
+    { text: "Mechanic" },
+    { text: "Marketing" },
+    { text: "Construction" },
+    { text: "Gardener" },
+    { text: "House Cleaner" },
+    { text: "Painter" },
+    { text: "Roofer" },
+    { text: "Locksmith" },
   ];
 
   return (
     <div className="main-container">
-      
+      {/*<span className="welcome">Welcome {phoneNumber} </span>*/}
+      <span className="welcome">Welcome</span>
+      <span className="to-our-platform">To Our Platform</span>
+
       <button className="sign-out-button" onClick={handleSignOut}>
         <span className="sign-out">Sign out</span>
       </button>
 
       {/*<span className="welcome">Welcome {phoneNumber} </span>*/}
       <span className="text-container">Welcome To Our Platform</span>
-      
+
       <div className="title-search-container">
-      <input
+        <input
           type="text"
           placeholder=" 🔍 Type to search..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          
         />
-        </div>
-        <Button text="" emoji="🔍" />
-    
+      </div>
+      <Button
+        text="Search"
+        emoji="🔍"
+        onClick={() =>
+          navigate("/ShowData", { state: { searchTerm: searchTerm } })
+        }
+      />
+
       <div className="help-section">
         <div className="line"></div>
         <span className="help-text">Popular searches</span>
@@ -101,26 +108,23 @@ function Home() {
 
       */}
 
-<div className="scroll-container">
-  {buttonsContent.map((button, index) => (
-    <button 
-      key={index} 
-      className="scroll-button"
-      onClick={() => navigate('/showdata', { state: { searchTerm: button.text } })}
-    >
-      {button.text}
-    </button>
-  ))}
-</div>
-
+      <div className="scroll-container">
+        {buttonsContent.map((button, index) => (
+          <button
+            key={index}
+            className="scroll-button"
+            onClick={() =>
+              navigate("/showdata", { state: { searchTerm: button.text } })
+            }
+          >
+            {button.text}
+          </button>
+        ))}
+      </div>
 
       <BottomBar />
     </div>
-
-    
   );
 }
 
 export default Home;
-
-//      <Button text="Customer" emoji="👤" linkTo="/customer" />

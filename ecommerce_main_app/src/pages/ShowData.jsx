@@ -135,7 +135,7 @@ const ShowData = () => {
                 result.item.city.toLowerCase() ===
                   selectedCity.toLowerCase()) &&
               (selectedJobField === "" ||
-                item["jobfield"].toLowerCase() ===
+                result.item["jobfield"].toLowerCase() ===
                   selectedJobField.toLowerCase())
           )
           .map((result) => (

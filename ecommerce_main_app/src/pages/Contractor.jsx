@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 import { firestore } from "../firebase";
 import { addDoc, collection } from "@firebase/firestore";
 import "./Contractor.css"; // Import external CSS file
+import BottomBar from "./BottomBar";
 
 const Contractor = () => {
   const [inputFields, setInputFields] = useState([
@@ -102,6 +103,7 @@ const Contractor = () => {
         ))}
         <button type="submit">Save now</button>
       </form>
+      <BottomBar/>
     </div>
   );
 };

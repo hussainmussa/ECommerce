@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 import { firestore } from "../firebase";
 import { addDoc, collection } from "@firebase/firestore";
 import "./Contractor.css"; // Import external CSS file
-import BottomBar from "./BottomBar";
+import BottomBar from "../components/BottomBar";
 
 const Contractor = () => {
   const [inputFields, setInputFields] = useState([

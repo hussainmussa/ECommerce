@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Home.css";
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
-import BottomBar from "./BottomBar";
+import BottomBar from "../components/BottomBar";
 import { useNavigate } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 

@@ -5,7 +5,7 @@ import "./ShowData.css"; // Import external CSS file
 import { useNavigate, useLocation } from "react-router-dom";
 import Select from "../components/Select";
 import Card from "../components/Card";
-import BottomBar from "./BottomBar";
+import BottomBar from "../components/BottomBar";
 import Fuse from "fuse.js";
 
 const ShowData = () => {

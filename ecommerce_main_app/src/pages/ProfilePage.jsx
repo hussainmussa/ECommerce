@@ -1,5 +1,5 @@
 import "./ProfilePage.css"; // Import the CSS file for styling
-import BottomBar from "./BottomBar";
+import BottomBar from "../components/BottomBar";
 import React, { useContext, useEffect, useState } from "react";
 import { firestore } from "../firebase";
 import { collection, getDocs } from "@firebase/firestore";

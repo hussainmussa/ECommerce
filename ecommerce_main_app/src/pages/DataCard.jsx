@@ -11,7 +11,7 @@ import { FaHeart } from "react-icons/fa";
 import { IoCall } from "react-icons/io5";
 import { useLocation } from "react-router-dom";
 import { FavoritesContext } from "../components/FavoritesContext";
-import BottomBar from "./BottomBar.jsx";
+import BottomBar from "../components/BottomBar";
 
 async function StringToCordination(address) {
   const response = await axios.get(

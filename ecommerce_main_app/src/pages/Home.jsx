@@ -8,7 +8,7 @@ import { FaSearch } from "react-icons/fa";
 function Home() {
   const auth = getAuth();
   const [searchTerm, setSearchTerm] = useState("");
-  
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -24,25 +24,24 @@ function Home() {
     signOut(auth)
       .then(() => {
         console.log("Sign-out successful");
-        window.location.href = '/PhoneAuth';
+        window.location.href = "/PhoneAuth";
       })
       .catch((error) => {
         console.error("Error signing out:", error);
       });
   };
-  
-  const Button = ({ text, emoji, linkTo }) => {
+
+  const Button = ({ text, emoji, linkTo, onClick }) => {
     return (
       <button
         className="rectangle"
-        onClick={() => linkTo && window.location.assign(linkTo)}
+        onClick={onClick || (() => linkTo && window.location.assign(linkTo))}
       >
         {emoji && <span className="user">{emoji}</span>}
         <span className="sign-up">{text}</span>
       </button>
     );
   };
-
   const navigate = useNavigate();
 
   const buttonsContent = [
@@ -95,11 +94,7 @@ function Home() {
       </div>
       <BottomBar />
     </div>
-
-    
   );
 }
 
 export default Home;
-
-//      <Button text="Customer" emoji="👤" linkTo="/customer" />

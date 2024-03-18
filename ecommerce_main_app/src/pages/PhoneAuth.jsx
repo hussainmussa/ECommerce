@@ -1,10 +1,10 @@
-// PhoneAuth.jsx
 import { useState } from "react";
 import { auth } from "../firebase";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import OtpInput from "otp-input-react";
 import PhoneInput from "react-phone-input-2";
-import './PhoneAuth.css'; // Import your CSS file for styling
+import "react-phone-input-2/lib/style.css";
+import './PhoneAuth.css'; 
 
 const PhoneAuth = () => {
   const [otp, setOtp] = useState("");
@@ -64,56 +64,57 @@ const PhoneAuth = () => {
   };
   
   return (
+    
     <div className="phone-auth-container">
-      {user ? (
-        <h2>Login Success</h2>
-      ) : (
-        <div className="phone-auth-content"> 
-          <h1>Welcome to CODE A PROGRAM</h1>
-          {showOTP ? (
+     
+          
+    <h1 className="register-label">Register</h1>
+  {user ? (
+    <h2>Login Success</h2>
+  ) : (
+    <div className="phone-auth-content">
+      <p className="registration-text">
+        Add your phone number, We'll send you a verification code
+      </p>
+      {showOTP ? (
+        <>
+          <div className="phone-auth-content">
+            <OtpInput
+              value={otp}
+              onChange={setOtp}
+              OTPLength={6}
+              otpType="number"
+              disabled={false}
+              autoFocus
+            ></OtpInput>
+          </div>
+          <button onClick={onOTPVerify} disabled={loading} className="button">
+            {loading ? 'Loading...' : 'Verify OTP'}
+          </button>
+          {showErrormsg ? (
             <>
-              <div className="phone-auth-content"> 
-              <OtpInput
-                  value={otp}
-                  onChange={setOtp}
-                  OTPLength={6}
-                  otpType="number"
-                  disabled={false}
-                  autoFocus
-                ></OtpInput>
-                </div>
-              <button onClick={onOTPVerify} disabled={loading}>
-                {loading ? 'Loading...' : 'Verify OTP'}
-              </button>
-              
-              {showErrormsg ?(
-                <>
-                    <label>Wrong code</label>
-                </>
-
-              ):
-              <>
-               
-              </>
-                
-              }
+              <label className="error-message">Wrong code</label>
             </>
-           
-            
           ) : (
             <>
-              <label>Verify your phone number </label>
-             
-              <PhoneInput country={"il"} value={ph} onChange={setPh} />
-              <button onClick={onSignup} disabled={loading}>
-                {loading ? 'Loading...' : 'Send code via SMS'}
-              </button>
             </>
           )}
-          <div id="recaptcha-container"></div>
-        </div>
+        </>
+      ) : (
+        <>
+          
+          <PhoneInput country={"il"} value={ph} onChange={setPh} className="phone-input-label" placeholder="Enter your phone number" />
+          <button onClick={onSignup} disabled={loading} className="button">
+            {loading ? 'Loading...' : 'Send code via SMS'}
+          </button>
+        </>
       )}
+      <div id="recaptcha-container"></div>
     </div>
+  )}
+</div>
+
+
   );
 };
 export default PhoneAuth;

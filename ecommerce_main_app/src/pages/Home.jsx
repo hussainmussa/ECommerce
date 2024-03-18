@@ -1,6 +1,5 @@
 // Home.jsx
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import "./Home.css"; // Import external CSS file
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 import BottomBar from "./BottomBar";
@@ -10,7 +9,7 @@ function Home() {
   const auth = getAuth();
   const [phoneNumber, setPhoneNumber] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
-
+  
   useEffect(() => {
     // Listen for changes in authentication state
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -73,10 +72,14 @@ function Home() {
       <span className="welcome">Welcome</span>
       <span className="to-our-platform">To Our Platform</span>
 
+      
       <button className="sign-out-button" onClick={handleSignOut}>
         <span className="sign-out">Sign out</span>
       </button>
 
+      {/*<span className="welcome">Welcome {phoneNumber} </span>*/}
+      <span className="text-container">Welcome To Our Platform</span>
+      
       <div className="title-search-container">
         <input
           type="text"

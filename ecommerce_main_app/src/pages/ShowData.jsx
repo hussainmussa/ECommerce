@@ -2,10 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { firestore } from "../firebase";
 import { collection, getDocs } from "@firebase/firestore";
 import "./ShowData.css"; // Import external CSS file
-import { useNavigate,useLocation  } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Select from "../components/Select";
 import Card from "../components/Card";
 import BottomBar from "./BottomBar";
+import Fuse from "fuse.js";
 
 const ShowData = () => {
   const [selectedCountry, setSelectedCountry] = useState("");
@@ -14,6 +15,7 @@ const ShowData = () => {
   const [data, setData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
+  const [fuse, setFuse] = useState(null);
 
   const location = useLocation();
   useEffect(() => {
@@ -38,6 +40,16 @@ const ShowData = () => {
 
     fetchData();
   }, [location.state?.searchTerm]);
+
+  useEffect(() => {
+    const fuseInstance = new Fuse(data, {
+      keys: ["full name", "job field", "country", "city"],
+      includeScore: true,
+      threshold: 0.3,
+    });
+
+    setFuse(fuseInstance);
+  }, [data]);
 
   const handleClick = (item) => {
     navigate("/datacard", {
@@ -81,6 +93,10 @@ const ShowData = () => {
     navigate("/favorite");
   };
 
+  const results = searchTerm
+    ? fuse.search(searchTerm)
+    : data.map((item) => ({ item }));
+
   return (
     <div className="data-container">
       <div className="title-search-container">
@@ -89,7 +105,9 @@ const ShowData = () => {
           type="text"
           placeholder="Type to search..."
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+          }}
         />
         <button onClick={navigateToFavorite}>Go to Favorite</button>
         <div className="title-search-container_row">
@@ -106,33 +124,25 @@ const ShowData = () => {
         </div>
       </div>
       <div className="data-card-container">
-        {data
+        {results
           .filter(
-            (item) =>
-              (item["full name"]
-              .toLowerCase()
-              .includes(searchTerm.toLowerCase()) ||
-              item["job field"]
-                .toLowerCase()
-                .includes(searchTerm.toLowerCase()) ||
-                item["country"]
-                  .toLowerCase()
-                  .includes(searchTerm.toLowerCase()) ||
-                item["city"]
-                  .toLowerCase()
-                  .includes(searchTerm.toLowerCase())) &&
-               
+            (result) =>
               (selectedCountry === "" ||
-                item["country"].toLowerCase() ===
+                result.item.country.toLowerCase() ===
                   selectedCountry.toLowerCase()) &&
               (selectedCity === "" ||
-                item["city"].toLowerCase() === selectedCity.toLowerCase()) &&
+                result.item.city.toLowerCase() ===
+                  selectedCity.toLowerCase()) &&
               (selectedJobField === "" ||
-                item["job field"].toLowerCase() ===
+                result.item["job field"].toLowerCase() ===
                   selectedJobField.toLowerCase())
           )
-          .map((item) => (
-            <Card key={item.id} item={item} handleClick={handleClick} />
+          .map((result) => (
+            <Card
+              key={result.item.id}
+              item={result.item}
+              handleClick={handleClick}
+            />
           ))}
       </div>
       <BottomBar />

@@ -91,7 +91,7 @@ const ShowData = () => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <button onClick={navigateToFavorite}>Go to Favorite</button>
+        <button onClick={navigateToFavorite} className="button">Go to Favorite </button >
         <div className="title-search-container_row">
           {selects.map((select, index) => (
             <Select

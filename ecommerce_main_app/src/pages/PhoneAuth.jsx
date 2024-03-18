@@ -5,6 +5,7 @@ import OtpInput from "otp-input-react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import './PhoneAuth.css'; 
+import { MDBBtn } from 'mdb-react-ui-kit';
 
 const PhoneAuth = () => {
   const [otp, setOtp] = useState("");
@@ -68,16 +69,18 @@ const PhoneAuth = () => {
     <div className="phone-auth-container">
      
           
-    <h1 className="register-label">Register</h1>
+    
   {user ? (
     <h2>Login Success</h2>
   ) : (
     <div className="phone-auth-content">
-      <p className="registration-text">
-        Add your phone number, We'll send you a verification code
-      </p>
+      
       {showOTP ? (
         <>
+        <h1 className="register-label">Verification</h1>
+          <p className="registration-text">
+          Enter the code sent to your phone number
+        </p>
           <div className="phone-auth-content">
             <OtpInput
               value={otp}
@@ -89,6 +92,7 @@ const PhoneAuth = () => {
             ></OtpInput>
           </div>
           <button onClick={onOTPVerify} disabled={loading} className="button">
+          
             {loading ? 'Loading...' : 'Verify OTP'}
           </button>
           {showErrormsg ? (
@@ -102,7 +106,10 @@ const PhoneAuth = () => {
         </>
       ) : (
         <>
-          
+        <h1 className="register-label">Register</h1>
+          <p className="registration-text">
+          Add your phone number, We'll send you a verification code
+        </p>
           <PhoneInput country={"il"} value={ph} onChange={setPh} className="phone-input-label" placeholder="Enter your phone number" />
           <button onClick={onSignup} disabled={loading} className="button">
             {loading ? 'Loading...' : 'Send code via SMS'}

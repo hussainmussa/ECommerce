@@ -1,18 +1,15 @@
 // Home.jsx
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import "./Home.css"; // Import external CSS file
 import { getAuth,signOut, onAuthStateChanged } from "firebase/auth";
 import BottomBar from "./BottomBar"; 
 import { useNavigate } from 'react-router-dom';
-
 
 function Home() {
   const auth = getAuth();
   const [phoneNumber, setPhoneNumber] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   
-
   useEffect(() => {
     // Listen for changes in authentication state
     const unsubscribe = onAuthStateChanged(auth, (user) => {

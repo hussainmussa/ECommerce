@@ -17,6 +17,7 @@
 
 input,
 select,
+
 textarea,
 button {
   outline: 0;
@@ -263,6 +264,13 @@ button {
   left: 20px; /* Adjust left position */
   padding: 5px 10px; /* Adjust padding for smaller button */
   font-size: 14px; /* Adjust font size */
+  background-color: #7D4BDB; /* Match this color to the one in your design */
+  color: #FFFFFF;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 20px;
+  cursor: pointer;
 }
 
 .title-search-container {

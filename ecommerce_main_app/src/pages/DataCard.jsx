@@ -62,6 +62,7 @@ function DataCard() {
   const appleMapsUrl = `http://maps.apple.com/?ll=${locationCor[0]},${locationCor[1]}`;
 
   return (
+    <div className="BG-container">
     <div className="mainContainer">
       <t1 className="body">Job details</t1>
       <div>
@@ -98,6 +99,7 @@ function DataCard() {
         <a href={appleMapsUrl} target="_blank" rel="noopener noreferrer">
           <img src={appleMapsIcon} alt="Apple Maps" className="MapsIcon" />
         </a>
+      </div>
       </div>
       <BottomBar/>
     </div>

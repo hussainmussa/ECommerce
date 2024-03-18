@@ -61,19 +61,19 @@ const ShowData = () => {
       value: selectedCountry,
       setValue: setSelectedCountry,
       options: countries,
-      defaultOption: "All Countries",
+      defaultOption: "Country",
     },
     {
       value: selectedCity,
       setValue: setSelectedCity,
       options: cities,
-      defaultOption: "All Cities",
+      defaultOption: "City",
     },
     {
       value: selectedJobField,
       setValue: setSelectedJobField,
       options: jobFields,
-      defaultOption: "All Job Fields",
+      defaultOption: "Job Field",
     },
   ];
 
@@ -82,6 +82,7 @@ const ShowData = () => {
   };
 
   return (
+    <div className="BG-container">
     <div className="data-container">
       <div className="title-search-container">
         <h2>Contractors</h2>
@@ -134,6 +135,7 @@ const ShowData = () => {
           .map((item) => (
             <Card key={item.id} item={item} handleClick={handleClick} />
           ))}
+      </div>
       </div>
       <BottomBar />
     </div>

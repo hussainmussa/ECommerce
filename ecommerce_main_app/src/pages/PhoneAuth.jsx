@@ -66,7 +66,7 @@ const PhoneAuth = () => {
   
   return (
     
-    <div className="phone-auth-container">
+    <div className="BG-container">
      
           
     

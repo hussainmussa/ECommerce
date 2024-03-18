@@ -109,6 +109,7 @@ const ProfilePage = () => {
   };
 
   return (
+    <div className="BG-container">
     <div className="profile-container">
       <div className="profile-icon">{profileData.icon}</div>
       <div className="profile-name">{profileData.name}</div>
@@ -142,7 +143,7 @@ const ProfilePage = () => {
     ))}
 </div>
 
-
+</div>
       <BottomBar/>
     </div>
   );

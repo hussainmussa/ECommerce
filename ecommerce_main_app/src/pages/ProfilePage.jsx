@@ -4,8 +4,7 @@ import React, {  useEffect, useState } from "react";
 import { firestore } from "../firebase";
 import { collection, getDocs } from "@firebase/firestore";
 import "./ShowData.css"; // Import external CSS file
-import { useNavigate, useLocation } from "react-router-dom";
-import Select from "../components/Select";
+import { useNavigate} from "react-router-dom";
 import Card from "../components/Card";
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 
@@ -88,9 +87,7 @@ const ProfilePage = () => {
     item["phonenumber"] === phoneNumber);
 
 
-  const navigateToFavorite = () => {
-    navigate("/favorite");
-  };
+  
   const navigateToContractorApplication = () => {
     navigate("/contractor", { state: { phoneNumber: phoneNumber } });
   };
@@ -134,7 +131,7 @@ const ProfilePage = () => {
       <div className="profile-bio">{profileData.bio}</div>
 
 
-<button onClick={navigateToContractorApplication}>
+<button onClick={navigateToContractorApplication} className="button-auth">
 Add Bussiness
       </button>
 

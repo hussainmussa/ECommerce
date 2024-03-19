@@ -24,6 +24,7 @@
   
   .form-field {
     margin-bottom: 15px;
+    overflow-y: auto;
   }
   
   label {
@@ -94,6 +95,7 @@
   }
   
   .search-input {
+
     width: 100%;
     border: none;
     outline: none;
@@ -104,14 +106,5 @@
   
 
   
-  .search-input {
-    width: 100%;
-    border: none;
-    outline: none;
-    padding: 5px;
-    font-size: 16px;
-    color: var(--search-bar-placeholder);
-  }
   
-  /* Add more styling as needed */
   

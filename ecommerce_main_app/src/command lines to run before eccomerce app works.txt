@@ -1,0 +1,5 @@
+npm install firebase
+npm i react-router
+npm install react-phone-input-2 --save
+npm i mdb-react-ui-kit
+npm i google-libphonenumber

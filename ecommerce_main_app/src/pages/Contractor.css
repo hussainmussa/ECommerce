@@ -1,13 +1,35 @@
 /* Contractor.css */
-.contractor-container {
-  
-  padding: 0.1px;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  width: 100%; /* Use percentage for width */
-  height: 100vh; /* Use viewport height for height */
+.BG-container {
+  height: 100vh; /* Set the height of the container to full viewport height */
 }
+
+.contractor-container {
+  max-width: 600px; /* Set a max-width to prevent the content from becoming too wide */
+  margin: 0 auto; /* Center the container horizontally */
+}
+
+.form-field {
+  margin-bottom: 15px;
+}
+
+.input-container {
+  position: relative;
+}
+
+.input1 {
+  width: calc(100% - 20px); /* Adjusted width to accommodate error message */
+}
+
+.error-message {
+  position: absolute;
+  bottom: -20px; /* Adjusted position to move the error message inside the input box */
+  left: 0;
+  color: red;
+  font-size: 12px; /* Adjust font size if needed */
+}
+
+
+
 
 .form-field {
   margin-bottom: 15px;
@@ -32,15 +54,13 @@
   display: block; /* Needed for margin: 0 auto to work */
 }
 
-button {
-  background-color: #83793acc;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 12px;
-  height: 5vh; /* Relative to viewport height */
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease; /* Transition effect */
-}
 
+.button{
+  background-color: #7D4BDB;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  margin-bottom: 40px;
+  
+}

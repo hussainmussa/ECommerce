@@ -3,8 +3,7 @@ import BottomBar from "../components/BottomBar";
 import React, {  useEffect, useState } from "react";
 import { firestore } from "../firebase";
 import { collection, getDocs } from "@firebase/firestore";
-
-import { useNavigate,useLocation  } from "react-router-dom";
+import { useNavigate  } from "react-router-dom";
 import Card from "../components/Card";
 import { getAuth,signOut, onAuthStateChanged } from "firebase/auth";
 
@@ -19,7 +18,7 @@ const ProfilePage = () => {
   const navigate = useNavigate();
   const auth = getAuth();
   const [phoneNumber, setPhoneNumber] = useState(null);
-  const location = useLocation();
+  
   
   const handleSignOut = () => {
     signOut(auth)
@@ -95,6 +94,9 @@ const ProfilePage = () => {
   const navigateToFavorite = () => {
     navigate("/favorite");
   };
+  const navigateToContractorApplication = () => {
+    navigate("/contractor", { state: { phoneNumber: phoneNumber } });
+  };
 
 
   // Hardcoded profile data for demonstration
@@ -118,6 +120,7 @@ const ProfilePage = () => {
   };
 
   return (
+    
     <div className="BG-container">
       <button className="sign-out-button" onClick={handleSignOut}>
           <span className="sign-out">Sign out</span>
@@ -133,7 +136,10 @@ const ProfilePage = () => {
       </div>
       <div className="profile-bio">{profileData.bio}</div>
 
-<Button text="Add Bussiness" emoji="🛠️" linkTo="/contractor" />
+
+<button onClick={navigateToContractorApplication}>
+Add Bussiness
+      </button>
 
       <div className="profile-bio">Bussinesses for {phoneNumber}:</div>
 

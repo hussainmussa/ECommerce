@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./DataCard.css";
 import myImage from "../images/HandyManBG.jpg";
-import services from "../assets/services.jsx";
 import googleMapsIcon from "../images/googleMapsIcon.png";
 import wazeIcon from "../images/wazeIcon.png";
 import appleMapsIcon from "../images/appleMapsIcon.png";
 import axios from "axios";
-import { FaRegHeart } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa";
-import { IoCall } from "react-icons/io5";
 import { useLocation } from "react-router-dom";
 import { FavoritesContext } from "../components/FavoritesContext";
 import BottomBar from "../components/BottomBar";
@@ -16,6 +12,7 @@ import { firestore } from '../firebase'; // Import your Firestore instance
 import { collection, query, where, getDocs, doc, updateDoc, getDoc } from "firebase/firestore";
 import { useNavigate } from 'react-router-dom';
 import { MdFavoriteBorder } from "react-icons/md";
+import { getAuth,signOut, onAuthStateChanged } from "firebase/auth";
 
 async function StringToCordination(address) {
   const response = await axios.get(
@@ -33,14 +30,11 @@ async function StringToCordination(address) {
 
 function DataCard() {
   const navigate = useNavigate(); // Declare navigate function
-
-  const { addFavorite, removeFavorite } = React.useContext(FavoritesContext);
   const location = useLocation();
+  const { addFavorite, removeFavorite } = React.useContext(FavoritesContext);
   const { fullname, country, city, street, streetnumber, phonenumber, rating, documentIdd } = location.state;
-  
   const [locationCor, setLocationCor] = useState([0, 0]);
   const [isHeartFilled, setHeartFilled] = useState(false);
-  
   const [isEditMode, setIsEditMode] = useState(false);
   const [editableFullname, setEditableFullname] = useState(fullname);
   const [editableCountry, setEditableCountry] = useState(country);
@@ -48,9 +42,26 @@ function DataCard() {
   const [editableStreet, setEditableStreet] = useState(street);
   const [editableStreetNumber, setEditableStreetNumber] = useState(streetnumber);
   const [editableRating, setEditableRating] = useState(rating); 
+  const auth = getAuth();
+  const [UserphoneNumber, setUserPhoneNumber] = useState(null);
   
-  
-  
+  useEffect(() => {
+    // Listen for changes in authentication state
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in.
+        // Get user's phone number if available
+        setUserPhoneNumber(user.UserphoneNumber);
+      } else {
+        // No user is signed in.
+        setUserPhoneNumber(null);
+      }
+    });
+
+    // Clean up subscription on unmount
+    return () => unsubscribe();
+  }, [auth]);
+
   const fetchData = async (documentId) => {
     const docRef = doc(firestore, "Contractors", documentId);
     const docSnap = await getDoc(docRef);
@@ -78,13 +89,13 @@ function DataCard() {
   }, [city, street, streetnumber]);
 
   useEffect(() => {
-    if (phonenumber === "+16505554567") {
+    if (phonenumber === "+972526494751") {
       setIsEditMode(true);
     }
   }, [phonenumber]);
 
   const handleSave = async () => {
-    console.log("Document IDDDDDDDDDDDD:"); 
+    console.log("Document ID:"); 
       //Get query that fits the phone number
     const contractorsRef = collection(firestore, "Contractors");
     const q = query(contractorsRef, where("phonenumber", "==", "+16505554567"));
@@ -225,7 +236,7 @@ function DataCard() {
             )}
           </div>
           <div className="info-item">Phone number: {phonenumber}</div>
-          <div className="info-item">Rating: {rating} stars</div>
+          <div className="info-item">Rating: {rating} 5</div>
         </div>
       </pre>
       <div className="MapsIconContainer">

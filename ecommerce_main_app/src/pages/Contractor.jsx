@@ -83,6 +83,7 @@ const Contractor = () => {
   };
 
   return (
+    <div className="BG-container">
     <div className="contractor-container">
       <h2>Contractor Registration</h2>
       <form onSubmit={handleSave}>
@@ -103,6 +104,7 @@ const Contractor = () => {
         ))}
         <button type="submit">Save now</button>
       </form>
+      </div>
       <BottomBar/>
     </div>
   );

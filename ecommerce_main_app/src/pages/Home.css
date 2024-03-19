@@ -9,6 +9,7 @@
   height: 100vh;
   margin: 0 auto;
   font-size: 0;
+  
  }
 
 .main-container,
@@ -30,17 +31,18 @@ button {
   align-items: center;
   justify-content: center;
   position: relative;
-  width: 80%;
+  width: 90%;
   margin: 10vh auto 2vh;
   color: #000000;
-  font-family: Inter, var(--default-font-family);
+  font-family: "Lato";
   font-size: 4vw;
-  font-weight: 400;
+  font-weight: 520;
   line-height: 1.2;
   text-align: center;
   white-space: nowrap;
   z-index: 14;
-  font-family: "Manrope";
+  
+ 
 }
 
 .sign-out-button {
@@ -62,7 +64,7 @@ button {
   align-items: center;
   justify-content: center;
   width: 50px;
-  margin-bottom: 0;
+  bottom: 40px;
   
 }
 
@@ -105,6 +107,7 @@ button {
   border-radius: 10px;
   scrollbar-width: none;
   font-family: "Manrope";
+  bottom: 100px;
 
 }
 
@@ -116,14 +119,14 @@ button {
 .scroll-button {
   padding: 10px; 
   margin-bottom: 10px; 
-  background-color: #f0f0f0; 
+  background-color: rgba(240, 240, 240, 0.6); /* Adjust the opacity by changing the last value (0.8) */
   cursor: pointer;
-  border: 0.1px solid #f0f0f0; 
+  border: 0.1px solid rgba(240, 240, 240, 0.6); /* Match the border color with the background color */
   border-radius: 5px; 
   color: #000; 
   font-family: "Manrope";
-  
 }
+
 .search-input-container {
   display: flex;
   align-items: center;
@@ -136,9 +139,10 @@ button {
   border: none;
   cursor: pointer;
   padding: 0;
-  outline: none;
+  outline: 1;
   position: absolute;
   right: 10px; /* Adjust this value if needed */
+  color: #727272;
 }
 
 .search-icon-button:focus {
@@ -147,6 +151,14 @@ button {
 
 input[type="text"] {
   padding-right: 30px; /* Adjust as needed to make space for the icon */
+}
+
+.main-logo {
+  top: 15px;
+  width: 160px; /* Adjust the width as needed */
+  height: auto; /* Automatically adjust height to maintain aspect ratio */
+ 
+  
 }
 
 

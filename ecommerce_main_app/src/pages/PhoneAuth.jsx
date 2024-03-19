@@ -77,11 +77,11 @@ const PhoneAuth = () => {
       
       {showOTP ? (
         <>
-        <h1 className="register-label">Verification</h1>
-          <p className="registration-text">
+        <h1 >Verification</h1>
+          <p >
           Enter the code sent to your phone number
         </p>
-          <div className="phone-auth-content">
+          
             <OtpInput
               value={otp}
               onChange={setOtp}
@@ -90,8 +90,8 @@ const PhoneAuth = () => {
               disabled={false}
               autoFocus
             ></OtpInput>
-          </div>
-          <button onClick={onOTPVerify} disabled={loading} className="button">
+          
+          <button onClick={onOTPVerify} disabled={loading} className="button-auth ">
           
             {loading ? 'Loading...' : 'Verify OTP'}
           </button>
@@ -111,7 +111,7 @@ const PhoneAuth = () => {
           Add your phone number, We'll send you a verification code
         </p>
           <PhoneInput country={"il"} value={ph} onChange={setPh} className="phone-input-label" placeholder="Enter your phone number" />
-          <button onClick={onSignup} disabled={loading} className="button">
+          <button onClick={onSignup} disabled={loading} className="button-auth ">
             {loading ? 'Loading...' : 'Send code via SMS'}
           </button>
         </>

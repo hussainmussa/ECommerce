@@ -1,23 +1,26 @@
+/* BottomBar.css */
+
 .bottom-bar {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    background-color: #f0f0f0;
-    padding: 10px 0;
-  }
-  
-  .bottom-icon {
-    text-decoration: none;
-    color: black;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 14px;
-  }
-  
-  .bottom-icon > span {
-    margin-top: 4px;
-  }
-  
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  background-color: rgba(255, 255, 255, 0.65); /* Decrease alpha value for more transparency */
+  padding: 10px 0;
+  transition: background-color 0.3s ease;
+}
+
+.bottom-icon {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 14px;
+  color: #7D4BDB; /* Set icon color */
+  font-size: 22px; /* Set icon size */
+}
+
+.bottom-icon > span {
+  margin-top: 4px;
+}

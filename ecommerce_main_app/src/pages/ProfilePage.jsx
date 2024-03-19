@@ -1,11 +1,10 @@
 import "./ProfilePage.css"; // Import the CSS file for styling
 import BottomBar from "../components/BottomBar";
-import React, { useContext, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { firestore } from "../firebase";
 import { collection, getDocs } from "@firebase/firestore";
-import "./ShowData.css"; // Import external CSS file
+
 import { useNavigate,useLocation  } from "react-router-dom";
-import Select from "../components/Select";
 import Card from "../components/Card";
 import { getAuth,signOut, onAuthStateChanged } from "firebase/auth";
 
@@ -20,8 +19,18 @@ const ProfilePage = () => {
   const navigate = useNavigate();
   const auth = getAuth();
   const [phoneNumber, setPhoneNumber] = useState(null);
-
   const location = useLocation();
+  
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        console.log("Sign-out successful");
+        window.location.href = "/PhoneAuth";
+      })
+      .catch((error) => {
+        console.error("Error signing out:", error);
+      });
+  };
   useEffect(() => {
     
     const fetchData = async () => {
@@ -110,6 +119,9 @@ const ProfilePage = () => {
 
   return (
     <div className="BG-container">
+      <button className="sign-out-button" onClick={handleSignOut}>
+          <span className="sign-out">Sign out</span>
+        </button>
     <div className="profile-container">
       <div className="profile-icon">{profileData.icon}</div>
       <div className="profile-name">{profileData.name}</div>

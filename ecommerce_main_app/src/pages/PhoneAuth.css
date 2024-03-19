@@ -1,4 +1,3 @@
-/* PhoneAuth.css */
 .BG-container {
   display: flex;
   flex-direction: column;
@@ -7,41 +6,62 @@
   background-image: url('../images/BG.png'); 
   background-size: cover; 
   background-position: center; 
-  height: 100vh; 
-  width: 100%; 
+  height: 100vh; /* Set height to 100% of viewport height */
+  width: 100vw; /* Set width to 100% of viewport width */
+  overflow: hidden; /* Hide any overflowing content */
+}
+/* PhoneAuth.css */
+.phone-auth-content .otp-input-container {
+  display: flex;
+  justify-content: flex-start; /* Align squares to the left */
 }
 
+.phone-auth-content .otp-input-container .otp-input-box {
+  margin-right: 5px; /* Adjust the margin between squares */
+}
+
+/* Additional styles to handle overflow */
 .phone-auth-content {
   text-align: center;
-  background-color: #FFFFFF;
-  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.5); /* Adjust the alpha value (0.9) to make it slightly transparent */
+  padding: 1rem;
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 90%;
-  max-width: 400px;
+  max-width: 100%; /* Adjust max-width to your desired value */
+  overflow: hidden; /* Hide any overflowing content */
+  overflow-x: hidden; /* Hide horizontal overflow */
 }
+
+
+
 
 .center-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100%; /* Set height to 100% */
+  width: 100%; /* Set width to 100% */
+  
 }
 
 .opt-container,
 .phone-input-container {
   margin-top: 1rem;
+  
 }
 
-.button {
-  background-color: #7D4BDB; /* Match this color to the one in your design */
+.button-auth {
+  background-color: #7D4BDB;
   color: #FFFFFF;
-  padding: 10px 20px;
   border: none;
-  border-radius: 5px;
-  margin-top: 20px;
+  border-radius: 10px;
+  margin-top: 2rem;
   cursor: pointer;
 }
+
+
 
 .button:disabled {
   background-color: #CCC;
@@ -52,8 +72,3 @@
   color: #FF0000;
   margin-top: 1rem;
 }
-
-
-
-
-

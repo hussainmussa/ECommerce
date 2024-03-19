@@ -15,6 +15,7 @@ import BottomBar from "../components/BottomBar";
 import { firestore } from '../firebase'; // Import your Firestore instance
 import { collection, query, where, getDocs, doc, updateDoc, getDoc } from "firebase/firestore";
 import { useNavigate } from 'react-router-dom';
+import { MdFavoriteBorder } from "react-icons/md";
 
 async function StringToCordination(address) {
   const response = await axios.get(
@@ -148,94 +149,85 @@ function DataCard() {
   const appleMapsUrl = `http://maps.apple.com/?ll=${locationCor[0]},${locationCor[1]}`;
 
   return (
-    <div className="BG-container">
+  <div className="BG-container">
     <div className="mainContainer">
       <span className="body">Job details</span>
       <div>
         {isEditMode && (
           <button onClick={handleSave}>Save</button>
         )}
-        <img src={myImage} alt="Job" className="jobImage" />
+        <div className="image-container">
+          <img src={myImage} alt="Job" className="jobImage" />
+          <div className="name">{fullname}</div>
+        </div>
         <div className="icon-container">
           <button className="heart" onClick={handleHeartClick}>
-            {isHeartFilled ? <FaHeart color="red" /> : <FaRegHeart />}
+            {isHeartFilled ? <MdFavoriteBorder color="red" /> : <MdFavoriteBorder />}
           </button>
-          <a href={`tel:${phonenumber}`} className="phone">
-            <IoCall size={24} color="black" />
-          </a>
         </div>
       </div>
       <pre className="jobDetails1">
-
-
-
-      <div className="info">
-  <div className="info-item">
-    {isEditMode ? (
-      <>
-        <label htmlFor="fullname">Name:</label>
-        <input
-          id="fullname"
-          value={editableFullname}
-          onChange={(e) => setEditableFullname(e.target.value)}
-        />
-      </>
-    ) : (
-      `Name: ${fullname}`
-    )}
-  </div>
-
-  <div className="info-item">
-    {isEditMode ? (
-      <>
-        <label htmlFor="country">Country:</label>
-        <input
-          id="country"
-          value={editableCountry}
-          onChange={(e) => setEditableCountry(e.target.value)}
-        />
-      </>
-    ) : (
-      `Country: ${country}`
-    )}
-  </div>
-
-  <div className="info-item">
-    {isEditMode ? (
-      <>
-        <label htmlFor="city">City:</label>
-        <input
-          id="city"
-          value={editableCity}
-          onChange={(e) => setEditableCity(e.target.value)}
-        />
-      </>
-    ) : (
-      `City: ${city}`
-    )}
-  </div>
-
-  <div className="info-item">
-    {isEditMode ? (
-      <>
-        <label htmlFor="street">Street:</label>
-        <input
-          id="street"
-          value={editableStreet}
-          onChange={(e) => setEditableStreet(e.target.value)}
-        />
-      </>
-    ) : (
-      `Street: ${street}`
-    )}
-      </div>
-
-        <div className="info-item">Phone number: {phonenumber}</div>
-      <div className="info-item">Rating: {rating} stars</div>
-      </div>
-
+        <div className="info">
+          <div className="info-item">
+            {isEditMode ? (
+              <>
+                <label htmlFor="fullname">Name:</label>
+                <input
+                  id="fullname"
+                  value={editableFullname}
+                  onChange={(e) => setEditableFullname(e.target.value)}
+                />
+              </>
+            ) : (
+              `Name: ${fullname}`
+            )}
+          </div>
+          <div className="info-item">
+            {isEditMode ? (
+              <>
+                <label htmlFor="country">Country:</label>
+                <input
+                  id="country"
+                  value={editableCountry}
+                  onChange={(e) => setEditableCountry(e.target.value)}
+                />
+              </>
+            ) : (
+              `Country: ${country}`
+            )}
+          </div>
+          <div className="info-item">
+            {isEditMode ? (
+              <>
+                <label htmlFor="city">City:</label>
+                <input
+                  id="city"
+                  value={editableCity}
+                  onChange={(e) => setEditableCity(e.target.value)}
+                />
+              </>
+            ) : (
+              `City: ${city}`
+            )}
+          </div>
+          <div className="info-item">
+            {isEditMode ? (
+              <>
+                <label htmlFor="street">Street:</label>
+                <input
+                  id="street"
+                  value={editableStreet}
+                  onChange={(e) => setEditableStreet(e.target.value)}
+                />
+              </>
+            ) : (
+              `Street: ${street}`
+            )}
+          </div>
+          <div className="info-item">Phone number: {phonenumber}</div>
+          <div className="info-item">Rating: {rating} stars</div>
+        </div>
       </pre>
-      {/*<p className="jobDetails">{services}</p>*/}
       <div className="MapsIconContainer">
         <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer">
           <img src={googleMapsIcon} alt="Google Maps" className="MapsIcon" />
@@ -247,10 +239,12 @@ function DataCard() {
           <img src={appleMapsIcon} alt="Apple Maps" className="MapsIcon" />
         </a>
       </div>
-      </div>
-      <BottomBar/>
     </div>
-  );
+    <BottomBar/>
+  </div>
+);
+
+
 }
 
 export default DataCard;

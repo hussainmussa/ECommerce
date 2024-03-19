@@ -7,13 +7,16 @@
 
 .mainContainer {
   overflow: hidden;
+  
 }
 
 .mainContainer,
 .mainContainer * {
   box-sizing: border-box;
   position: relative; /* Ensure the parent container has a position property */
+  
 }
+
 
 input,
 select,
@@ -49,17 +52,19 @@ button {
   z-index: 15;
   margin-bottom: 2vh;
   margin-top: 5vh;
+  
 }
 
+/* Job image styles */
 .jobImage {
-  display: flex;
-  position: relative;
-  width: 50%; /* Adjust as needed */
-  height: auto; /* Keep aspect ratio */
-  float: left; /* Align to the left */
-  margin-left: 40px; /* Add left margin */
-  margin-bottom: 15px; /* Add bottom margin */
+  width: 100px; /* Set a fixed width for the circular image */
+  height: 100px; /* Set a fixed height for the circular image */
+  border-radius: 50%; /* Make it round */
+  overflow: hidden; /* Hide overflow content */
+  margin-right: 180px;
 }
+
+
 
 .jobDetails {
   display: flex;
@@ -109,22 +114,24 @@ button {
   display: flex;
   text-align: left;
   margin: 40px; /* Add left margin */
+  
 }
 
 .heart {
-  background-color: transparent;
+  background-color: transparent; /* Set background color to transparent */
   border: none;
   padding: 0;
   cursor: pointer;
   font-size: 2rem; /* adjust size as needed */
   position: absolute;
   right: 20px;
+  width: 40px; /* adjust size as needed */
+  height: 40px; 
+  color: #000; /* Set the color of the heart icon */
 }
 
-.heart:focus {
-  outline: none;
-  box-shadow: none;
-}
+
+
 
 .phone {
   position: absolute;
@@ -134,29 +141,35 @@ button {
   align-items: center;
   border: 2px solid #fff; /* adjust color as needed */
   border-radius: 50%;
-  width: 50px; /* adjust size as needed */
-  height: 50px; /* adjust size as needed */
+  width: 40px; /* adjust size as needed */
+  height: 40px; /* adjust size as needed */
 }
 
 .icon-container {
   position: absolute;
-  right: 20px; /* adjust as needed */
+  right: 0; /* Position the container to the right */
   display: flex;
+  align-items: center; /* Align items vertically */
+  top: 50%; /* Position the container vertically centered */
+  transform: translateY(-50%); /* Adjust for vertical centering */
 }
+
 
 .info {
   display: flex;
   flex-direction: column;
-  background-color: #f8f9fa; /* Light background */
+  background-color: rgba(255, 255, 255, 0.1);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Soft shadow for depth */
   max-width: 400px; /* Max width for the info container */
   margin: auto; /* Center the container */
+  
 }
 
 .info-item {
   margin-bottom: 10px; /* Space between items */
+  
 }
 
 .info-item label {
@@ -170,4 +183,7 @@ button {
   padding: 8px; /* Padding for input */
   border: 1px solid #ccc; /* Border for inputs */
   border-radius: 4px; /* Rounded corners for inputs */
+  
 }
+
+

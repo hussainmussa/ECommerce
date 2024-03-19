@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./Home.css";
-import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
+import { getAuth , onAuthStateChanged } from "firebase/auth";
 import BottomBar from "../components/BottomBar";
 import { useNavigate } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
+import MainLogo from "../images/MainLogo.png";
 
 function Home() {
   const auth = getAuth();
@@ -20,28 +21,8 @@ function Home() {
     return () => unsubscribe();
   }, [auth]);
 
-  const handleSignOut = () => {
-    signOut(auth)
-      .then(() => {
-        console.log("Sign-out successful");
-        window.location.href = "/PhoneAuth";
-      })
-      .catch((error) => {
-        console.error("Error signing out:", error);
-      });
-  };
+  
 
-  const Button = ({ text, emoji, linkTo, onClick }) => {
-    return (
-      <button
-        className="rectangle"
-        onClick={onClick || (() => linkTo && window.location.assign(linkTo))}
-      >
-        {emoji && <span className="user">{emoji}</span>}
-        <span className="sign-up">{text}</span>
-      </button>
-    );
-  };
   const navigate = useNavigate();
 
   const buttonsContent = [
@@ -52,14 +33,11 @@ function Home() {
   return (
     <div className="BG-container">
       <div className="main-container">
-
-        <span className="text-container">How can we help you?</span>
-
-        <button className="sign-out-button" onClick={handleSignOut}>
-          <span className="sign-out">Sign out</span>
-        </button>
-
+      
+        <img src={MainLogo} alt="Logo" className="main-logo" />
+        
         <div className="title-search-container">
+          <span className="text-container">How can we help you?</span>
           <div className="search-input-container">
             <input
               type="text"
@@ -71,14 +49,13 @@ function Home() {
               <FaSearch />
             </button>
           </div>
-        </div>
-
+       
         <div className="help-section">
           <div className="line"></div>
           <span className="help-text">Popular searches</span>
           <div className="line"></div>
         </div>
-
+        </div>
         <div className="scroll-container">
           {buttonsContent.map((button, index) => (
             <button
@@ -90,11 +67,11 @@ function Home() {
             </button>
           ))}
         </div>
-
       </div>
       <BottomBar />
     </div>
   );
+  
 }
 
 export default Home;

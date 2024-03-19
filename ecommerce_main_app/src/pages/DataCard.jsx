@@ -9,12 +9,19 @@ import { IoStarOutline, IoStar } from "react-icons/io5";
 import { IoCall } from "react-icons/io5";
 import { useLocation } from "react-router-dom";
 import BottomBar from "../components/BottomBar";
-import { firestore } from '../firebase'; // Import your Firestore instance
-import { collection, query, where, getDocs, doc, updateDoc, getDoc } from "firebase/firestore";
-import { useNavigate } from 'react-router-dom';
+import { firestore } from "../firebase"; // Import your Firestore instance
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  doc,
+  updateDoc,
+  getDoc,
+} from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 import { MdFavoriteBorder } from "react-icons/md";
-import { getAuth,signOut, onAuthStateChanged } from "firebase/auth";
-
+import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 
 async function StringToCordination(address) {
   const response = await axios.get(
@@ -31,7 +38,16 @@ async function StringToCordination(address) {
 function DataCard() {
   const navigate = useNavigate(); // Declare navigate function
   const location = useLocation();
-  const { fullname, country, city, street, streetnumber, phonenumber, rating, documentIdd } = location.state;
+  const {
+    fullname,
+    country,
+    city,
+    street,
+    streetnumber,
+    phonenumber,
+    rating,
+    documentIdd,
+  } = location.state;
   const [locationCor, setLocationCor] = useState([0, 0]);
   const [isHeartFilled, setHeartFilled] = useState(false);
   const [isStarFilled, setStarFilled] = useState(false);
@@ -41,11 +57,12 @@ function DataCard() {
   const [editableCountry, setEditableCountry] = useState(country);
   const [editableCity, setEditableCity] = useState(city);
   const [editableStreet, setEditableStreet] = useState(street);
-  const [editableStreetNumber, setEditableStreetNumber] = useState(streetnumber);
-  const [editableRating, setEditableRating] = useState(rating); 
+  const [editableStreetNumber, setEditableStreetNumber] =
+    useState(streetnumber);
+  const [editableRating, setEditableRating] = useState(rating);
   const auth = getAuth();
   const [UserphoneNumber, setUserPhoneNumber] = useState(null);
-  
+
   useEffect(() => {
     // Listen for changes in authentication state
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -105,7 +122,7 @@ function DataCard() {
         console.log("Ratings data is undefined");
       }
     }
-};
+  };
 
   useEffect(() => {
     // Listen for changes in authentication state
@@ -130,7 +147,7 @@ function DataCard() {
   useEffect(() => {
     // Listen for changes in authentication state
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      console.log("is this a user ? " + user.phoneNumber)
+      console.log("is this a user ? " + user.phoneNumber);
       if (user) {
         // User is signed in.
         // Get user's phone number if available
@@ -142,9 +159,9 @@ function DataCard() {
         console.log("fail");
       }
     });
-        // Clean up subscription on unmount
-        return () => unsubscribe();
-    }, [auth]);
+    // Clean up subscription on unmount
+    return () => unsubscribe();
+  }, [auth]);
 
   useEffect(() => {
     StringToCordination(city + " " + street + " " + streetnumber)
@@ -208,7 +225,7 @@ function DataCard() {
   };
 
   const handleSave = async () => {
-      //Get query that fits the phone number
+    //Get query that fits the phone number
     const contractorsRef = collection(firestore, "Contractors");
     const q = query(contractorsRef, where("phonenumber", "==", phoneNumber));
 
@@ -216,9 +233,9 @@ function DataCard() {
     //Change the doc
     if (!querySnapshot.empty) {
       const documentId = querySnapshot.docs[0].id; // Get the document ID
-    
-    const docRef = doc(firestore, 'Contractors', documentId);
-    
+
+      const docRef = doc(firestore, "Contractors", documentId);
+
       // Object to hold the updates
       let updates = {};
 
@@ -231,18 +248,18 @@ function DataCard() {
         updates.streetnumber = editableStreetNumber;
       if (rating !== editableRating) updates.rating = editableRating;
 
-  // Check if updates object is not empty
-  if (Object.keys(updates).length > 0) {
-    try {
-      await updateDoc(docRef, updates);
-      setIsEditMode(false); // Exit edit mode
-      fetchData(documentId);
-    } catch (error) {
-      console.error("Error updating document: ", error);
-    }
-         } else {
-      console.log("No changes detected, no update performed");
-       }
+      // Check if updates object is not empty
+      if (Object.keys(updates).length > 0) {
+        try {
+          await updateDoc(docRef, updates);
+          setIsEditMode(false); // Exit edit mode
+          fetchData(documentId);
+        } catch (error) {
+          console.error("Error updating document: ", error);
+        }
+      } else {
+        console.log("No changes detected, no update performed");
+      }
       setIsEditMode(false); // Exit edit mode after saving
       navigate("/ProfilePage");
     }
@@ -363,11 +380,8 @@ function DataCard() {
         </div>
       </div>
       <BottomBar />
-    
-  </div>
-);
-
-
+    </div>
+  );
 }
 
 export default DataCard;

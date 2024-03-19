@@ -43,7 +43,7 @@ const ShowData = () => {
 
   useEffect(() => {
     const fuseInstance = new Fuse(data, {
-      keys: ["full name", "job field", "country", "city"],
+      keys: ["fullname", "jobfield", "country", "city"],
       includeScore: true,
       threshold: 0.3,
     });
@@ -60,7 +60,7 @@ const ShowData = () => {
         street: item.street,
         streetnumber: item["streetnumber"],
         phonenumber: item["phonenumber"],
-        documentIdd : item.id
+        documentIdd: item.id,
       },
     });
   };
@@ -90,62 +90,58 @@ const ShowData = () => {
     },
   ];
 
-  const navigateToFavorite = () => {
-    navigate("/favorite");
-  };
-
   const results = searchTerm
     ? fuse.search(searchTerm)
     : data.map((item) => ({ item }));
 
   return (
     <div className="BG-container">
-    <div className="data-container">
-      <div className="title-search-container">
-        <h2>Contractors</h2>
-        <input
-          type="text"
-          placeholder="Type to search..."
-          value={searchTerm}
-          onChange={(e) => {
-            setSearchTerm(e.target.value);
-          }}
-        />
-        <div className="title-search-container_row">
-          {selects.map((select, index) => (
-            <Select
-              key={index}
-              className="title-search-container"
-              value={select.value}
-              onChange={(e) => select.setValue(e.target.value)}
-              options={select.options}
-              defaultOption={select.defaultOption}
-            />
-          ))}
+      <div className="data-container">
+        <div className="title-search-container">
+          <h2>Contractors</h2>
+          <input
+            type="text"
+            placeholder="Type to search..."
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+            }}
+          />
+          <div className="title-search-container_row">
+            {selects.map((select, index) => (
+              <Select
+                key={index}
+                className="title-search-container"
+                value={select.value}
+                onChange={(e) => select.setValue(e.target.value)}
+                options={select.options}
+                defaultOption={select.defaultOption}
+              />
+            ))}
+          </div>
         </div>
-      </div>
-      <div className="data-card-container">
-        {results
-          .filter(
-            (result) =>
-              (selectedCountry === "" ||
-                result.item.country.toLowerCase() ===
-                  selectedCountry.toLowerCase()) &&
-              (selectedCity === "" ||
-                result.item.city.toLowerCase() ===
-                  selectedCity.toLowerCase()) &&
-              (selectedJobField === "" ||
-                result.item["jobfield"].toLowerCase() ===
-                  selectedJobField.toLowerCase())
-          )
-          .map((result) => (
-            <Card
-              key={result.item.id}
-              item={result.item}
-              handleClick={handleClick}
-            />
-          ))}
-      </div>
+        <div className="data-card-container">
+          {results
+            .filter(
+              (result) =>
+                (selectedCountry === "" ||
+                  result.item.country.toLowerCase() ===
+                    selectedCountry.toLowerCase()) &&
+                (selectedCity === "" ||
+                  result.item.city.toLowerCase() ===
+                    selectedCity.toLowerCase()) &&
+                (selectedJobField === "" ||
+                  result.item["jobfield"].toLowerCase() ===
+                    selectedJobField.toLowerCase())
+            )
+            .map((result) => (
+              <Card
+                key={result.item.id}
+                item={result.item}
+                handleClick={handleClick}
+              />
+            ))}
+        </div>
       </div>
       <BottomBar />
     </div>

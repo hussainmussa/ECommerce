@@ -1,0 +1,49 @@
+
+.data-image {
+    width: 65px; /* Set a fixed width for the circular image */
+    height: 65px; /* Set a fixed height for the circular image */
+    border-radius: 50%; /* Make it round */
+    overflow: hidden; /* Hide overflow content */
+    position: relative; /* Position the image relative to its container */
+    margin-left: auto; /* Push the image to the right */
+    margin-top: -40px; /* Adjust as needed */
+    margin-right: -360px; /* Adjust as needed */
+}
+
+  
+.data-card {
+  flex: 0 0 auto;
+  margin: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  border: none;
+  width: 90%; /* Adjust card width as needed */
+  height: 25%;
+  max-height: 91vh;
+  max-width:100vmax;
+  border-radius: 10px;
+  box-shadow: 0px 10px 20px rgba(44, 23, 23, 0.1);
+  background-color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-content {
+  display: flex;
+  align-items: center;
+
+}
+
+
+
+.data-value.name {
+  font-weight: bold; /* Optionally set the name font to bold */
+  color: rgb(56, 0, 60);
+  font-size:larger;
+  font-family: "Lato";
+
+}
+  
+  /* Add additional styles as needed */
+  

@@ -3,10 +3,11 @@ import { firestore } from "../firebase";
 import { addDoc, collection } from "@firebase/firestore";
 import "./Contractor.css"; 
 import BottomBar from "../components/BottomBar";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Contractor = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { phoneNumber } = location.state || {};
 
   const [inputFields, setInputFields] = useState([
@@ -21,7 +22,7 @@ const Contractor = () => {
   ]);
 
   const ref = collection(firestore, "Contractors");
-
+  
   const handleSave = async (e) => {
     e.preventDefault();
 
@@ -53,6 +54,7 @@ const Contractor = () => {
     } catch (error) {
       console.error(error);
     }
+    navigate("../ProfilePage");
   };
 
   const handleChange = (e, id) => {
@@ -91,18 +93,20 @@ const Contractor = () => {
               <label htmlFor={field.label}>
                 {field.label.charAt(0).toUpperCase() + field.label.slice(1)}
               </label>
-              <input
-                type="text"
-                id={field.label}
-                className="input1"
-                value={field.value}
-                onChange={(e) => handleChange(e, field.id)}
-                readOnly={field.label === "phonenumber"}
-              />
-              {field.error && <div style={{ color: "red" }}>{field.error}</div>}
+              <div className="input-container">
+                <input
+                  type="text"
+                  id={field.label}
+                  className="input1"
+                  value={field.value}
+                  onChange={(e) => handleChange(e, field.id)}
+                  readOnly={field.label === "phonenumber"}
+                />
+                {field.error && <div className="error-message">{field.error}</div>}
+              </div>
             </div>
           ))}
-          <button type="submit">Save now</button>
+          <button type="submit" className="button">Save now</button>
         </form>
       </div>
       <BottomBar />

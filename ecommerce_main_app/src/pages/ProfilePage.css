@@ -29,4 +29,13 @@
     font-style: italic;
     
   }
+  .button-auth {
+    background-color: #7D4BDB;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 10px;
+    margin-top: 2rem;
+    cursor: pointer;
+    
+  }
   

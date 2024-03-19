@@ -11,7 +11,7 @@ import {
     doc,
     updateDoc,
     getDoc } from "firebase/firestore";
-import { number } from "prop-types";
+
 
 const User = () => {
   const location = useLocation();
@@ -26,7 +26,6 @@ const User = () => {
     { id: 4, label: "bio", value: bio, error: "" },
   ]);
 
-  const ref = collection(firestore, "Users");
   
   useEffect(() => {
     const fetchUserData = async () => {

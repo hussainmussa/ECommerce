@@ -12,7 +12,7 @@ import { doc, getDoc, query, where } from "firebase/firestore";
 
 // Define a functional component for the profile page
 const ProfilePage = () => {
-  const [selectedCountry, setSelectedCountry] = useState("");
+  const [selectedCountry] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
   const [selectedJobField, setSelectedJobField] = useState("");
   const [data, setData] = useState([]);

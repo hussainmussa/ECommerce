@@ -6,11 +6,9 @@ import googleMapsIcon from "../images/googleMapsIcon.png";
 import wazeIcon from "../images/wazeIcon.png";
 import appleMapsIcon from "../images/appleMapsIcon.png";
 import axios from "axios";
-import { FaRegHeart } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa";
+import { IoStarOutline, IoStar } from "react-icons/io5";
 import { IoCall } from "react-icons/io5";
 import { useLocation } from "react-router-dom";
-import { FavoritesContext } from "../components/FavoritesContext";
 import BottomBar from "./BottomBar.jsx";
 
 async function StringToCordination(address) {
@@ -26,12 +24,21 @@ async function StringToCordination(address) {
 }
 
 function DataCard() {
-  const { addFavorite, removeFavorite } = React.useContext(FavoritesContext);
   const location = useLocation();
-  const { fullname, country, city, street, streetnumber, phonenumber, rating } =
-    location.state;
+  const {
+    id,
+    fullname,
+    country,
+    city,
+    street,
+    streetnumber,
+    phonenumber,
+    rating,
+  } = location.state;
   const [locationCor, setLocationCor] = useState([0, 0]);
-  const [isHeartFilled, setHeartFilled] = useState(false);
+  const [rate, setRating] = useState(0);
+  const [isStarFilled, setStarFilled] = useState(false); // Add this line
+  const [userPhoneNumber, setUserPhoneNumber] = useState(""); // Add this line
 
   useEffect(() => {
     StringToCordination(city + " " + street + " " + streetnumber)
@@ -39,22 +46,22 @@ function DataCard() {
       .catch((err) => console.error(err));
   }, [city, street, streetnumber]);
 
-  const handleHeartClick = () => {
-    const contractor = {
-      fullname,
-      country,
-      city,
-      street,
-      streetnumber,
-      phonenumber,
-      rating,
-    };
-    if (isHeartFilled) {
-      removeFavorite(contractor);
-    } else {
-      addFavorite(contractor);
+  const handleStarClick = () => {
+    setStarFilled(!isStarFilled);
+    if (!isStarFilled) {
+      setRating(0);
     }
-    setHeartFilled(!isHeartFilled);
+  };
+
+  const handleRatingClick = (num) => {
+    setRating(num);
+
+    // Send a request to your backend to update the contractor's rating
+    axios.post(`/api/contractor/${id}/rating`, {
+      contractorPhoneNumber: phonenumber,
+      userPhoneNumber: userPhoneNumber,
+      rating: num,
+    });
   };
 
   const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${locationCor[0]},${locationCor[1]}`;
@@ -67,9 +74,22 @@ function DataCard() {
       <div>
         <img src={myImage} alt="Job" className="jobImage" />
         <div className="icon-container">
-          <button className="heart" onClick={handleHeartClick}>
-            {isHeartFilled ? <FaHeart color="red" /> : <FaRegHeart />}
-          </button>
+          <div className="star-rating-container">
+            <button className="star" onClick={handleStarClick}>
+              {isStarFilled ? (
+                <IoStar color="yellow" size={30} />
+              ) : (
+                <IoStarOutline size={30} />
+              )}
+            </button>
+            {isStarFilled && (
+              <div className="rating-bar">
+                {[1, 2, 3, 4, 5].map((num) => (
+                  <button onClick={() => handleRatingClick(num)}>{num}</button>
+                ))}
+              </div>
+            )}
+          </div>
           <a href={`tel:${phonenumber}`} className="phone">
             <IoCall size={24} color="black" />
           </a>
@@ -99,7 +119,7 @@ function DataCard() {
           <img src={appleMapsIcon} alt="Apple Maps" className="MapsIcon" />
         </a>
       </div>
-      <BottomBar/>
+      <BottomBar />
     </div>
   );
 }

@@ -68,15 +68,9 @@ function Home() {
 
   return (
     <div className="main-container">
-      {/*<span className="welcome">Welcome {phoneNumber} </span>*/}
-      <span className="welcome">Welcome</span>
-      <span className="to-our-platform">To Our Platform</span>
-
       <button className="sign-out-button" onClick={handleSignOut}>
         <span className="sign-out">Sign out</span>
       </button>
-
-      {/*<span className="welcome">Welcome {phoneNumber} </span>*/}
       <span className="text-container">Welcome To Our Platform</span>
 
       <div className="title-search-container">

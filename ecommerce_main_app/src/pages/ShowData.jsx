@@ -109,7 +109,6 @@ const ShowData = () => {
             setSearchTerm(e.target.value);
           }}
         />
-        <button onClick={navigateToFavorite} className="button">Go to Favorite </button >
         <div className="title-search-container_row">
           {selects.map((select, index) => (
             <Select

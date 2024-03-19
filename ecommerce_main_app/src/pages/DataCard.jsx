@@ -52,7 +52,7 @@ function DataCard() {
     documentIdd,
   } = location.state;
   const [locationCor, setLocationCor] = useState([0, 0]);
-  const [isHeartFilled, setHeartFilled] = useState(false);
+  const [userRating, setUserRating] = useState(0);
   const [isStarFilled, setStarFilled] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState(null);
   const [isEditMode, setIsEditMode] = useState(false);
@@ -186,6 +186,7 @@ function DataCard() {
   }, [phonenumber, phoneNumber]);
 
   const handleRatingClick = async (ratingNumber) => {
+    setUserRating(ratingNumber);
     // Get the document that fits the phone number
     const contractorsRef = collection(firestore, "Contractors");
     const q = query(contractorsRef, where("phonenumber", "==", phonenumber));
@@ -313,7 +314,11 @@ function DataCard() {
                 <div className="rating-bar">
                   {[1, 2, 3, 4, 5].map((num) => (
                     <button onClick={() => handleRatingClick(num)}>
-                      {num}
+                      {num <= userRating ? (
+                        <IoStar color="yellow" size={30} />
+                      ) : (
+                        <IoStarOutline color="black" size={30} />
+                      )}
                     </button>
                   ))}
                 </div>

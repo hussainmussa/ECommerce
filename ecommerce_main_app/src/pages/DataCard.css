@@ -108,6 +108,7 @@ button {
   display: flex;
   text-align: left;
   margin: 40px; /* Add left margin */
+  width: 70%; /* Adjust width as needed */
 }
 
 .star {
@@ -126,15 +127,18 @@ button {
   align-items: center;
 }
 
+.star-rating-container button {
+  background-color: transparent;
+}
+
 .rating-bar {
   display: flex;
   justify-content: center;
   position: absolute; /* Add this line if it's not already there */
   flex-direction: column;
   gap: 0px; /* Adjust this value to control the space between the numbers */
-  width: 100%;
-  top: 50px;
-  right: 85px;
+  top: 60px;
+  right: 10px;
 }
 
 .phone {

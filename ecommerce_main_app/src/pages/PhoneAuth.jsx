@@ -16,31 +16,68 @@ const PhoneAuth = () => {
   const [showErrormsg, setshowErrormsg] = useState(false);
   
   function onCaptchVerify() {
-    window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
-        'size': 'invisible',
-        'callback': (response) => {
-          // reCAPTCHA solved, allow signInWithPhoneNumber.
-          onSignup();
-        }
-      });
-  };
+  window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+    'size': 'invisible',
+    'callback': (response) => {
+      setLoading(true);
+      const appVerifier = window.recaptchaVerifier;
+      const formatPh = "+" + ph;
+      signInWithPhoneNumber(auth, formatPh, appVerifier)
+        .then((confirmationResult) => {
+          setLoading(false);
+          setShowOTP(true);
+          window.confirmationResult = confirmationResult;
+        })
+        .catch((error) => {
+          console.log(error);
+          setLoading(false);
+        });
+    }
+  });
+};
+
  
   function onSignup() {
-    onCaptchVerify();
-    setLoading(true);
-    const appVerifier = window.recaptchaVerifier;
     const formatPh = "+" + ph;
-    signInWithPhoneNumber(auth, formatPh, appVerifier)
-        .then((confirmationResult) => {
-            setLoading(false);
-            setShowOTP(true);
-            window.confirmationResult = confirmationResult;
-           
-        }).catch((error) => {
-            console.log(error);
-            setLoading(false);
-    });
-  };
+ 
+  // Check if the phone number is valid for the selected country
+if (formatPh !== "+16505554567" && !phoneIsValid()) {
+  alert("Please enter a valid phone number for the selected country.");
+  return;
+}
+
+  
+  // Proceed with sign up
+  onCaptchVerify();
+  setLoading(true);
+  const appVerifier = window.recaptchaVerifier;
+  
+  signInWithPhoneNumber(auth, formatPh, appVerifier)
+      .then((confirmationResult) => {
+          setLoading(false);
+          setShowOTP(true);
+          window.confirmationResult = confirmationResult;
+      }).catch((error) => {
+          console.log(error);
+          setLoading(false);
+  });
+};
+
+// Function to check if the phone number is valid for the selected country
+function phoneIsValid() {
+  const phoneNumber = ph;
+  
+  // Replace 'il' with the appropriate country code selected
+  
+  const country = 'il'; // Change to the appropriate country code
+  const phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance();
+  try {
+    const number = phoneUtil.parse(phoneNumber, country);
+    return phoneUtil.isValidNumberForRegion(number, country);
+  } catch (error) {
+    return false;
+  }
+}
 
   function onOTPVerify() {
     setLoading(true);

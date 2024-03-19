@@ -24,7 +24,7 @@ const ProfilePage = () => {
     signOut(auth)
       .then(() => {
         console.log("Sign-out successful");
-        window.location.href = "/PhoneAuth";
+        window.location.href = "/";
       })
       .catch((error) => {
         console.error("Error signing out:", error);

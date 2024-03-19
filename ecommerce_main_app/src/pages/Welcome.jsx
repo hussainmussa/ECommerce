@@ -1,6 +1,6 @@
 import React from 'react';
 import './Welcome.css';
-import logo from '../images/HandyManLogo.jpg';
+import logo from '../images/MainLogo.png';
 import { useNavigate } from 'react-router-dom';
 
 const WelcomePage = () => {

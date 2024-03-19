@@ -7,6 +7,7 @@
     "@react-leaflet/core": "^2.1.0",
     "firebase": "^10.7.2",
     "framer-motion": "^11.0.8",
+    "google-libphonenumber": "^3.2.34",
     "leaflet": "^1.9.4",
     "node-fetch": "^3.3.2",
     "react-hook-form": "7.43",

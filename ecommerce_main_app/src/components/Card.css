@@ -1,13 +1,14 @@
 
 .data-image {
-    width: 65px; /* Set a fixed width for the circular image */
-    height: 65px; /* Set a fixed height for the circular image */
+    width: 80px; /* Set a fixed width for the circular image */
+    height: 80px; /* Set a fixed height for the circular image */
     border-radius: 50%; /* Make it round */
     overflow: hidden; /* Hide overflow content */
     position: relative; /* Position the image relative to its container */
-    margin-left: auto; /* Push the image to the right */
-    margin-top: -40px; /* Adjust as needed */
-    margin-right: -360px; /* Adjust as needed */
+    margin-left: 10px; /* Push the image to the right */
+    margin-top: 1ch; /* Adjust as needed */
+    margin-right: 0px; /* Adjust as needed */
+
 }
 
   
@@ -42,7 +43,7 @@
   color: rgb(56, 0, 60);
   font-size:larger;
   font-family: "Lato";
-
+  align-items: "left";
 }
   
   /* Add additional styles as needed */

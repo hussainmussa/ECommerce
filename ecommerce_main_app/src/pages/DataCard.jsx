@@ -19,9 +19,12 @@ import {
   updateDoc,
   getDoc,
 } from "firebase/firestore";
+import { deleteDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { MdFavoriteBorder } from "react-icons/md";
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
+import trashCan from "../images/trash-bin.png";
+import save from "../images/save.png";
 
 async function StringToCordination(address) {
   const response = await axios.get(
@@ -224,6 +227,27 @@ function DataCard() {
     }
   };
 
+  const handleDelete = async () => {
+    // Get query that fits the phone number
+    const contractorsRef = collection(firestore, "Contractors");
+    const q = query(contractorsRef, where("phonenumber", "==", phoneNumber));
+
+    const querySnapshot = await getDocs(q);
+    // Check if the query returned documents
+    if (!querySnapshot.empty) {
+      const documentId = querySnapshot.docs[0].id; // Get the document ID
+
+      try {
+        // Use deleteDoc to delete the document
+        await deleteDoc(doc(firestore, "Contractors", documentId));
+        console.log("Document successfully deleted!");
+      } catch (error) {
+        console.error("Error removing document: ", error);
+      }
+      navigate("/ProfilePage");
+    }
+  };
+
   const handleSave = async () => {
     //Get query that fits the phone number
     const contractorsRef = collection(firestore, "Contractors");
@@ -274,7 +298,6 @@ function DataCard() {
       <div className="mainContainer">
         <span className="body">Job details</span>
         <div>
-          {isEditMode && <button onClick={handleSave}>Save</button>}
           <img src={myImage} alt="Job" className="jobImage" />
           <div className="icon-container">
             <div className="star-rating-container">
@@ -285,6 +308,7 @@ function DataCard() {
                   <IoStarOutline size={30} />
                 )}
               </button>
+
               {isStarFilled && (
                 <div className="rating-bar">
                   {[1, 2, 3, 4, 5].map((num) => (
@@ -295,11 +319,13 @@ function DataCard() {
                 </div>
               )}
             </div>
+
             <a href={`tel:${phonenumber}`} className="phone">
               <IoCall size={24} color="black" />
             </a>
           </div>
         </div>
+
         <pre className="jobDetails1">
           <div className="info">
             <div className="info-item">
@@ -378,6 +404,31 @@ function DataCard() {
             <img src={appleMapsIcon} alt="Apple Maps" className="MapsIcon" />
           </a>
         </div>
+        {isEditMode && (
+          <>
+            <img
+              src={save}
+              alt="Edit"
+              onClick={handleSave}
+              style={{ marginTop: "10px", width: "80px", height: "40px" }}
+            />
+          </>
+        )}
+        {isEditMode && (
+          <>
+            <img
+              src={trashCan}
+              alt="Edit"
+              onClick={handleDelete}
+              style={{
+                marginTop: "10px",
+                marginLeft: "150px",
+                width: "40px",
+                height: "40px",
+              }}
+            />
+          </>
+        )}
       </div>
       <BottomBar />
     </div>

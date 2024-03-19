@@ -10,26 +10,23 @@ import Verification from "./pages/Verification";
 import SearchPage from "./pages/SearchPage";
 import DataCard from "./pages/DataCard";
 import ProfilePage from "./pages/ProfilePage";
-import { FavoritesProvider } from "./components/FavoritesProvider";
 
 function App() {
   return (
-    <FavoritesProvider>
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<PhoneAuth />} />
-          <Route path="/Home" element={<Home />} />
-          <Route path="/SignUp" element={<SignUp />} />
-          <Route path="/PhoneAuth" element={<PhoneAuth />} />
-          <Route path="/Contractor" element={<Contractor />} />
-          <Route path="/ShowData" element={<DataPage />} />
-          <Route path="/Verification" element={<Verification />} />
-          <Route path="/SearchPage" element={<SearchPage />} />
-          <Route path="/DataCard" element={<DataCard />} />
-          <Route path="/ProfilePage" element={<ProfilePage />} />
-        </Routes>
-      </div>
-    </FavoritesProvider>
+    <div className="App">
+      <Routes>
+        <Route path="/" element={<PhoneAuth />} />
+        <Route path="/Home" element={<Home />} />
+        <Route path="/SignUp" element={<SignUp />} />
+        <Route path="/PhoneAuth" element={<PhoneAuth />} />
+        <Route path="/Contractor" element={<Contractor />} />
+        <Route path="/ShowData" element={<DataPage />} />
+        <Route path="/Verification" element={<Verification />} />
+        <Route path="/SearchPage" element={<SearchPage />} />
+        <Route path="/DataCard" element={<DataCard />} />
+        <Route path="/ProfilePage" element={<ProfilePage />} />
+      </Routes>
+    </div>
   );
 }
 export default App;

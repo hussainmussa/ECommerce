@@ -4,11 +4,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { firestore } from "../firebase";
 import { collection, getDocs } from "@firebase/firestore";
 import "./ShowData.css"; // Import external CSS file
-import { useNavigate,useLocation  } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Select from "../components/Select";
 import Card from "../components/Card";
-import { getAuth,signOut, onAuthStateChanged } from "firebase/auth";
-
+import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 
 // Define a functional component for the profile page
 const ProfilePage = () => {
@@ -23,7 +22,6 @@ const ProfilePage = () => {
 
   const location = useLocation();
   useEffect(() => {
-    
     const fetchData = async () => {
       try {
         const querySnapshot = await getDocs(
@@ -38,9 +36,6 @@ const ProfilePage = () => {
       } catch (error) {
         console.error(error);
       }
-
-
-
     };
 
     fetchData();
@@ -79,14 +74,9 @@ const ProfilePage = () => {
   const countries = [...new Set(data.map((item) => item.country))];
   const cities = [...new Set(data.map((item) => item.city))];
   const jobFields = [...new Set(data.map((item) => item["jobfield"]))];
-  const filteredData = data.filter(item => 
-    item["phonenumber"] === phoneNumber);
-
-
-  const navigateToFavorite = () => {
-    navigate("/favorite");
-  };
-
+  const filteredData = data.filter(
+    (item) => item["phonenumber"] === phoneNumber
+  );
 
   // Hardcoded profile data for demonstration
   const profileData = {
@@ -94,7 +84,7 @@ const ProfilePage = () => {
     icon: "👤",
     location: "New York, NY",
     job: "Software Developer",
-    bio: "Passionate about creating impactful software. Lover of coffee and good books."
+    bio: "Passionate about creating impactful software. Lover of coffee and good books.",
   };
 
   const Button = ({ text, emoji, linkTo }) => {
@@ -110,41 +100,52 @@ const ProfilePage = () => {
 
   return (
     <div className="BG-container">
-    <div className="profile-container">
-      <div className="profile-icon">{profileData.icon}</div>
-      <div className="profile-name">{profileData.name}</div>
-      <div className="profile-info">
-        <strong>Location:</strong> {profileData.location}
+      <div className="profile-container">
+        <div className="profile-icon">{profileData.icon}</div>
+        <div className="profile-name">{profileData.name}</div>
+        <div className="profile-info">
+          <strong>Location:</strong> {profileData.location}
+        </div>
+        <div className="profile-info">
+          <strong>Job:</strong> {profileData.job}
+        </div>
+        <div className="profile-bio">{profileData.bio}</div>
+
+        <Button text="Add Bussiness" emoji="🛠️" linkTo="/contractor" />
+
+        <div className="profile-bio">Bussinesses for {phoneNumber}:</div>
+
+        <div className="data-card-container">
+          {filteredData
+            .filter(
+              (item) =>
+                (item["fullname"]
+                  .toLowerCase()
+                  .includes(searchTerm.toLowerCase()) ||
+                  item["jobfield"]
+                    .toLowerCase()
+                    .includes(searchTerm.toLowerCase()) ||
+                  item["country"]
+                    .toLowerCase()
+                    .includes(searchTerm.toLowerCase()) ||
+                  item["city"]
+                    .toLowerCase()
+                    .includes(searchTerm.toLowerCase())) &&
+                (selectedCountry === "" ||
+                  item["country"].toLowerCase() ===
+                    selectedCountry.toLowerCase()) &&
+                (selectedCity === "" ||
+                  item["city"].toLowerCase() === selectedCity.toLowerCase()) &&
+                (selectedJobField === "" ||
+                  item["jobfield"].toLowerCase() ===
+                    selectedJobField.toLowerCase())
+            )
+            .map((item) => (
+              <Card key={item.id} item={item} handleClick={handleClick} />
+            ))}
+        </div>
       </div>
-      <div className="profile-info">
-        <strong>Job:</strong> {profileData.job}
-      </div>
-      <div className="profile-bio">{profileData.bio}</div>
-
-<Button text="Add Bussiness" emoji="🛠️" linkTo="/contractor" />
-
-      <div className="profile-bio">Bussinesses for {phoneNumber}:</div>
-
-      <div className="data-card-container">
-  {filteredData
-    .filter(
-      (item) =>
-        (item["fullname"].toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item["jobfield"].toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item["country"].toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item["city"].toLowerCase().includes(searchTerm.toLowerCase())) &&
-     
-        (selectedCountry === "" || item["country"].toLowerCase() === selectedCountry.toLowerCase()) &&
-        (selectedCity === "" || item["city"].toLowerCase() === selectedCity.toLowerCase()) &&
-        (selectedJobField === "" || item["jobfield"].toLowerCase() === selectedJobField.toLowerCase())
-    )
-    .map((item) => (
-      <Card key={item.id} item={item} handleClick={handleClick} />
-    ))}
-</div>
-
-</div>
-      <BottomBar/>
+      <BottomBar />
     </div>
   );
 };

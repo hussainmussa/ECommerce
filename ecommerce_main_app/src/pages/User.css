@@ -1,0 +1,67 @@
+/* Contractor.css */
+.BG-container {
+    height: 100vh; /* Set the height of the container to full viewport height */
+  }
+  
+  .user-container {
+    max-width: 600px; /* Set a max-width to prevent the content from becoming too wide */
+    margin: 0 auto; /* Center the container horizontally */
+  }
+  
+  .form-field {
+    margin-bottom: 15px;
+  }
+  
+  .input-container {
+    position: relative;
+  }
+  
+  .input1 {
+    width: calc(100% - 20px); /* Adjusted width to accommodate error message */
+  }
+  
+  .error-message {
+    position: absolute;
+    bottom: -20px; /* Adjusted position to move the error message inside the input box */
+    left: 0;
+    color: red;
+    font-size: 12px; /* Adjust font size if needed */
+  }
+  
+  
+  
+  
+  .form-field {
+    margin-bottom: 15px;
+    font-family: Arial;
+    font-size: 20px;
+  }
+  
+  .label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .input1 {
+    width: 80%; /* Reduce this to make the input field narrower */
+    padding: 8px 15px; /* Increase this to make the input field wider */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 25px;
+    font-family: "Times New Roman"; /* Add this line to change the font */
+    margin: 0 auto; /* Center the input field */
+    display: block; /* Needed for margin: 0 auto to work */
+  }
+  
+  
+  .button{
+    background-color: #7D4BDB;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-bottom: 40px;
+    
+  }
+  

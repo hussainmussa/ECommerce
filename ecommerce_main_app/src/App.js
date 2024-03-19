@@ -11,6 +11,7 @@ import SearchPage from "./pages/SearchPage";
 import DataCard from "./pages/DataCard";
 import ProfilePage from "./pages/ProfilePage";
 import Welcome from "./pages/Welcome";
+import User from "./pages/User";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Route path="/SearchPage" element={<SearchPage />} />
           <Route path="/DataCard" element={<DataCard />} />
           <Route path="/ProfilePage" element={<ProfilePage />} />
+          <Route path="/User" element={<User />} />
         </Routes>
       </div>
     

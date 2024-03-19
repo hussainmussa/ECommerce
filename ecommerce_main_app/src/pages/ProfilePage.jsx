@@ -7,6 +7,8 @@ import "./ShowData.css"; // Import external CSS file
 import { useNavigate} from "react-router-dom";
 import Card from "../components/Card";
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
+import pen from '../images/pen.png';
+import { doc, getDoc, query, where } from "firebase/firestore";
 
 // Define a functional component for the profile page
 const ProfilePage = () => {
@@ -30,6 +32,11 @@ const ProfilePage = () => {
         console.error("Error signing out:", error);
       });
   };
+
+  const handleEdit = () => {
+    navigate("/User", { state: { phoneNumber: phoneNumber } });
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -93,15 +100,50 @@ const ProfilePage = () => {
   };
 
 
-  // Hardcoded profile data for demonstration
-  const profileData = {
-    name: "Jane Doe",
-    icon: "👤",
-    location: "New York, NY",
-    job: "Software Developer",
-    bio: "Passionate about creating impactful software. Lover of coffee and good books.",
-  };
 
+  const defaultProfileData = {
+    name: "Unknown",
+    icon: "👤",
+    location: "Not specified",
+    job: "Unemployed",
+    bio: "No bio available.",
+  };
+  
+    const [profileData, setProfileData] = useState(defaultProfileData);
+  
+    useEffect(() => {
+      const fetchProfileData = async () => {
+
+        const contractorsRef = collection(firestore, "Users");
+        const q = query(contractorsRef, where("phonenumber", "==", phoneNumber));
+    
+        const querySnapshot = await getDocs(q);
+
+        if (!querySnapshot.empty) {
+            const documentId = querySnapshot.docs[0].id;
+        
+        const docRef = doc(firestore, "Users", documentId);
+        const docSnap = await getDoc(docRef);
+  
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          setProfileData({
+            name: data.name || defaultProfileData.name,
+            icon: defaultProfileData.icon,
+            location: data.userlocation || defaultProfileData.location,
+            job: data.job || defaultProfileData.job,
+            bio: data.bio || defaultProfileData.bio,
+          });
+        } else {
+            console.log("No such document! Displaying default profile.");
+          }
+        } else {
+          console.log("No such document! Displaying default profile.");
+        }
+      };
+  
+      fetchProfileData();
+    }, [phoneNumber]);
   const Button = ({ text, emoji, linkTo }) => {
     return (
       <button
@@ -120,6 +162,17 @@ const ProfilePage = () => {
           <span className="sign-out">Sign out</span>
         </button>
     <div className="profile-container">
+    <img
+              src={pen}
+              alt="Edit"
+              onClick={handleEdit}
+              style={{
+                marginTop: "10px",
+                marginLeft: "270px",
+                width: "30px",
+                height: "30px",
+              }}
+            />
       <div className="profile-icon">{profileData.icon}</div>
       <div className="profile-name">{profileData.name}</div>
       <div className="profile-info">

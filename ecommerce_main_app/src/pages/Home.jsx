@@ -45,11 +45,11 @@ function Home() {
         <img src={MainLogo} alt="Logo" className="main-logo" />
         
         <div className="title-search-container">
-          <span className="text-container">How can we help you?</span>
+          <span className="text-container">What are you looking for?</span>
           <div className="search-input-container">
             <input
               type="text"
-              placeholder=" Type to search..."
+              placeholder=" ex: Painter..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />

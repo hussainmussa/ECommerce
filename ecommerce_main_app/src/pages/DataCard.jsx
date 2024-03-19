@@ -24,7 +24,7 @@ import { useNavigate } from "react-router-dom";
 import { MdFavoriteBorder } from "react-icons/md";
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 import trashCan from "../images/trash-bin.png";
-import save from "../images/save.png";
+import save from "../images/check.png";
 
 async function StringToCordination(address) {
   const response = await axios.get(
@@ -257,7 +257,7 @@ function DataCard() {
     //Change the doc
     if (!querySnapshot.empty) {
       const documentId = querySnapshot.docs[0].id; // Get the document ID
-
+    
       const docRef = doc(firestore, "Contractors", documentId);
 
       // Object to hold the updates
@@ -410,7 +410,7 @@ function DataCard() {
               src={save}
               alt="Edit"
               onClick={handleSave}
-              style={{ marginTop: "10px", width: "80px", height: "40px" }}
+              style={{ marginTop: "10px", width: "40px", height: "40px" }}
             />
           </>
         )}

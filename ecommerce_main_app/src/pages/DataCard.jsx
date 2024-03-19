@@ -77,7 +77,6 @@ function DataCard() {
       setEditableStreetNumber(data.streetnumber || "");
       setEditableRating(data.rating || "");
       // Add other fields as necessary
-      console.log("there is such document!");
     } else {
       console.log("No such document!");
     }
@@ -129,6 +128,25 @@ function DataCard() {
   }, [phonenumber]);
 
   useEffect(() => {
+    // Listen for changes in authentication state
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      console.log("is this a user ? " + user.phoneNumber)
+      if (user) {
+        // User is signed in.
+        // Get user's phone number if available
+        setPhoneNumber(user.phoneNumber);
+        console.log("success");
+      } else {
+        // No user is signed in.
+        setPhoneNumber(null);
+        console.log("fail");
+      }
+    });
+        // Clean up subscription on unmount
+        return () => unsubscribe();
+    }, [auth]);
+
+  useEffect(() => {
     StringToCordination(city + " " + street + " " + streetnumber)
       .then((coords) => setLocationCor(coords))
       .catch((err) => {
@@ -142,10 +160,10 @@ function DataCard() {
   };
 
   useEffect(() => {
-    if (phonenumber === "+972526494751") {
+    if (phonenumber === phoneNumber) {
       setIsEditMode(true);
     }
-  }, [phonenumber]);
+  }, [phonenumber, phoneNumber]);
 
   const handleRatingClick = async (ratingNumber) => {
     // Get the document that fits the phone number
@@ -190,18 +208,17 @@ function DataCard() {
   };
 
   const handleSave = async () => {
-    console.log("Document ID:"); 
       //Get query that fits the phone number
     const contractorsRef = collection(firestore, "Contractors");
-    const q = query(contractorsRef, where("phonenumber", "==", "+16505554567"));
+    const q = query(contractorsRef, where("phonenumber", "==", phoneNumber));
+
     const querySnapshot = await getDocs(q);
     //Change the doc
     if (!querySnapshot.empty) {
       const documentId = querySnapshot.docs[0].id; // Get the document ID
-      console.log("Document ID:", documentId);
-
-      const docRef = doc(firestore, "Contractors", documentId);
-
+    
+    const docRef = doc(firestore, 'Contractors', documentId);
+    
       // Object to hold the updates
       let updates = {};
 
@@ -214,19 +231,18 @@ function DataCard() {
         updates.streetnumber = editableStreetNumber;
       if (rating !== editableRating) updates.rating = editableRating;
 
-      // Check if updates object is not empty
-      if (Object.keys(updates).length > 0) {
-        try {
-          await updateDoc(docRef, updates);
-          console.log("Document successfully updated");
-          setIsEditMode(false); // Exit edit mode
-          fetchData(documentId);
-        } catch (error) {
-          console.error("Error updating document: ", error);
-        }
-      } else {
-        console.log("No changes detected, no update performed");
-      }
+  // Check if updates object is not empty
+  if (Object.keys(updates).length > 0) {
+    try {
+      await updateDoc(docRef, updates);
+      setIsEditMode(false); // Exit edit mode
+      fetchData(documentId);
+    } catch (error) {
+      console.error("Error updating document: ", error);
+    }
+         } else {
+      console.log("No changes detected, no update performed");
+       }
       setIsEditMode(false); // Exit edit mode after saving
       navigate("/ProfilePage");
     }

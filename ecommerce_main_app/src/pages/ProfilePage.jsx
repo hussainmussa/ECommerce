@@ -1,5 +1,5 @@
 import "./ProfilePage.css"; // Import the CSS file for styling
-import BottomBar from "./BottomBar";
+import BottomBar from "../components/BottomBar";
 import React, { useContext, useEffect, useState } from "react";
 import { firestore } from "../firebase";
 import { collection, getDocs } from "@firebase/firestore";
@@ -66,21 +66,21 @@ const ProfilePage = () => {
   const handleClick = (item) => {
     navigate("/datacard", {
       state: {
-        fullname: item["full name"],
+        fullname: item["fullname"],
         country: item.country,
         city: item.city,
         street: item.street,
-        streetnumber: item["street number"],
-        phonenumber: item["phone number"],
+        streetnumber: item["streetnumber"],
+        phonenumber: item["phonenumber"],
       },
     });
   };
 
   const countries = [...new Set(data.map((item) => item.country))];
   const cities = [...new Set(data.map((item) => item.city))];
-  const jobFields = [...new Set(data.map((item) => item["job field"]))];
+  const jobFields = [...new Set(data.map((item) => item["jobfield"]))];
   const filteredData = data.filter(item => 
-    item["phone number"] === phoneNumber);
+    item["phonenumber"] === phoneNumber);
 
 
   const navigateToFavorite = () => {
@@ -109,6 +109,7 @@ const ProfilePage = () => {
   };
 
   return (
+    <div className="BG-container">
     <div className="profile-container">
       <div className="profile-icon">{profileData.icon}</div>
       <div className="profile-name">{profileData.name}</div>
@@ -128,21 +129,21 @@ const ProfilePage = () => {
   {filteredData
     .filter(
       (item) =>
-        (item["full name"].toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item["job field"].toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (item["fullname"].toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item["jobfield"].toLowerCase().includes(searchTerm.toLowerCase()) ||
         item["country"].toLowerCase().includes(searchTerm.toLowerCase()) ||
         item["city"].toLowerCase().includes(searchTerm.toLowerCase())) &&
      
         (selectedCountry === "" || item["country"].toLowerCase() === selectedCountry.toLowerCase()) &&
         (selectedCity === "" || item["city"].toLowerCase() === selectedCity.toLowerCase()) &&
-        (selectedJobField === "" || item["job field"].toLowerCase() === selectedJobField.toLowerCase())
+        (selectedJobField === "" || item["jobfield"].toLowerCase() === selectedJobField.toLowerCase())
     )
     .map((item) => (
       <Card key={item.id} item={item} handleClick={handleClick} />
     ))}
 </div>
 
-
+</div>
       <BottomBar/>
     </div>
   );

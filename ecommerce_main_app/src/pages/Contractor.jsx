@@ -3,18 +3,18 @@ import React, { useRef, useState } from "react";
 import { firestore } from "../firebase";
 import { addDoc, collection } from "@firebase/firestore";
 import "./Contractor.css"; // Import external CSS file
-import BottomBar from "./BottomBar";
+import BottomBar from "../components/BottomBar";
 
 const Contractor = () => {
   const [inputFields, setInputFields] = useState([
-    { id: 1, label: "full name", value: "", error: "" },
+    { id: 1, label: "fullname", value: "", error: "" },
     { id: 2, label: "country", value: "", error: "" },
     { id: 3, label: "city", value: "", error: "" },
     { id: 4, label: "street", value: "", error: "" },
-    { id: 5, label: "street number", value: "", error: "" },
-    { id: 6, label: "phone number", value: "", error: "" },
+    { id: 5, label: "streetnumber", value: "", error: "" },
+    { id: 6, label: "phonenumber", value: "", error: "" },
     { id: 7, label: "ID", value: "", error: "" },
-    { id: 8, label: "job field", value: "", error: "" },
+    { id: 8, label: "jobfield", value: "", error: "" },
   ]);
 
   const ref = collection(firestore, "Contractors");
@@ -61,7 +61,7 @@ const Contractor = () => {
 
         // Full name, country, city, street, and job field limited to letters
         if (
-          ["full name", "country", "city", "street", "job field"].includes(
+          ["fullname", "country", "city", "street", "jobfield"].includes(
             field.label
           )
         ) {
@@ -69,7 +69,7 @@ const Contractor = () => {
         }
 
         // Phone number, ID and street number limited to numbers
-        if (["phone number", "ID", "street number"].includes(field.label)) {
+        if (["phonenumber", "ID", "streetnumber"].includes(field.label)) {
           value = value.replace(/[^0-9]/g, "");
         }
 

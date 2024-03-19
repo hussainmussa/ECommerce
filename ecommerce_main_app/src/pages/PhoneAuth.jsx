@@ -5,7 +5,7 @@ import OtpInput from "otp-input-react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import './PhoneAuth.css'; 
-import { MDBBtn } from 'mdb-react-ui-kit';
+
 
 const PhoneAuth = () => {
   const [otp, setOtp] = useState("");
@@ -66,7 +66,7 @@ const PhoneAuth = () => {
   
   return (
     
-    <div className="phone-auth-container">
+    <div className="BG-container">
      
           
     

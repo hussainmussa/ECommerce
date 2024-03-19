@@ -5,7 +5,7 @@ import "./ShowData.css"; // Import external CSS file
 import { useNavigate, useLocation } from "react-router-dom";
 import Select from "../components/Select";
 import Card from "../components/Card";
-import BottomBar from "./BottomBar";
+import BottomBar from "../components/BottomBar";
 import Fuse from "fuse.js";
 
 const ShowData = () => {
@@ -54,38 +54,39 @@ const ShowData = () => {
   const handleClick = (item) => {
     navigate("/datacard", {
       state: {
-        fullname: item["full name"],
+        fullname: item["fullname"],
         country: item.country,
         city: item.city,
         street: item.street,
-        streetnumber: item["street number"],
-        phonenumber: item["phone number"],
+        streetnumber: item["streetnumber"],
+        phonenumber: item["phonenumber"],
+        documentIdd : item.id
       },
     });
   };
 
   const countries = [...new Set(data.map((item) => item.country))];
   const cities = [...new Set(data.map((item) => item.city))];
-  const jobFields = [...new Set(data.map((item) => item["job field"]))];
+  const jobFields = [...new Set(data.map((item) => item["jobfield"]))];
 
   const selects = [
     {
       value: selectedCountry,
       setValue: setSelectedCountry,
       options: countries,
-      defaultOption: "All Countries",
+      defaultOption: "Country",
     },
     {
       value: selectedCity,
       setValue: setSelectedCity,
       options: cities,
-      defaultOption: "All Cities",
+      defaultOption: "City",
     },
     {
       value: selectedJobField,
       setValue: setSelectedJobField,
       options: jobFields,
-      defaultOption: "All Job Fields",
+      defaultOption: "Job Field",
     },
   ];
 
@@ -98,6 +99,7 @@ const ShowData = () => {
     : data.map((item) => ({ item }));
 
   return (
+    <div className="BG-container">
     <div className="data-container">
       <div className="title-search-container">
         <h2>Contractors</h2>
@@ -133,7 +135,7 @@ const ShowData = () => {
                 result.item.city.toLowerCase() ===
                   selectedCity.toLowerCase()) &&
               (selectedJobField === "" ||
-                result.item["job field"].toLowerCase() ===
+                result.item["jobfield"].toLowerCase() ===
                   selectedJobField.toLowerCase())
           )
           .map((result) => (
@@ -143,6 +145,7 @@ const ShowData = () => {
               handleClick={handleClick}
             />
           ))}
+      </div>
       </div>
       <BottomBar />
     </div>

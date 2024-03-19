@@ -6,8 +6,7 @@
   justify-content: flex-start;
   padding: 0.1px;
   height: 100vh;
-  background: linear-gradient(180deg, #80859a, rgba(200, 177, 115, 0.499));
-}
+ }
 
 .data-card {
   flex: 0 0 auto;

@@ -28,7 +28,6 @@ button {
   height: 100vh; /* Use viewport height for height */
   margin: 0 auto;
   font-size: 0px;
-  background: linear-gradient(180deg, #80859a, rgba(200, 177, 115, 0.499));
   overflow: hidden;
 }
 
@@ -40,9 +39,9 @@ button {
   width: 80%; /* Use percentage for width */
   height: auto; /* Let the browser calculate the height */
   margin: 10vh auto; /* Use viewport height for top margin, auto for right and left to center the element */
-  color: #ffffff;
-  font-family: Inter, var(--default-font-family);
-  font-size: 4vw; /* Use viewport width for font size */
+  color: #000000;
+  font-family: "Manrope";
+  font-size: 5vw; /* Use viewport width for font size */
   font-weight: 400;
   line-height: 1.2; /* Use unitless value for line height */
   text-align: center;
@@ -68,8 +67,8 @@ button {
   justify-content: left;
   position: relative;
   width: calc(100% - 80px); /* Adjust width to account for margins */
-  color: #ffffff;
-  font-family: Inter, var(--default-font-family);
+  color: #000000;
+  font-family: "Manrope";
   font-size: 4vw; /* Use viewport width for font size */
   font-weight: 400;
   line-height: 1.2; /* Use unitless value for line height */
@@ -89,7 +88,7 @@ button {
   position: relative;
   width: 70%; /* Adjust width to account for margins */
   color: #000000;
-  font-family: Inter, var(--default-font-family);
+  font-family: "Manrope";
   font-size: 4vw; /* Use viewport width for font size */
   font-weight: 400;
   line-height: 1.2; /* Use unitless value for line height */
@@ -154,4 +153,32 @@ button {
   position: absolute;
   right: 20px; /* adjust as needed */
   display: flex;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f9fa; /* Light background */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Soft shadow for depth */
+  max-width: 400px; /* Max width for the info container */
+  margin: auto; /* Center the container */
+}
+
+.info-item {
+  margin-bottom: 10px; /* Space between items */
+}
+
+.info-item label {
+  display: block; /* Ensure labels are block level for better alignment */
+  margin-bottom: 5px; /* Space between label and input */
+  font-weight: bold; /* Make labels bold */
+}
+
+.info-item input {
+  width: 100%; /* Full width inputs */
+  padding: 8px; /* Padding for input */
+  border: 1px solid #ccc; /* Border for inputs */
+  border-radius: 4px; /* Rounded corners for inputs */
 }

@@ -3,10 +3,11 @@ import BottomBar from "../components/BottomBar";
 import React, {  useEffect, useState } from "react";
 import { firestore } from "../firebase";
 import { collection, getDocs } from "@firebase/firestore";
-import { useNavigate  } from "react-router-dom";
+import "./ShowData.css"; // Import external CSS file
+import { useNavigate, useLocation } from "react-router-dom";
+import Select from "../components/Select";
 import Card from "../components/Card";
-import { getAuth,signOut, onAuthStateChanged } from "firebase/auth";
-
+import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 
 // Define a functional component for the profile page
 const ProfilePage = () => {
@@ -31,7 +32,6 @@ const ProfilePage = () => {
       });
   };
   useEffect(() => {
-    
     const fetchData = async () => {
       try {
         const querySnapshot = await getDocs(
@@ -46,9 +46,6 @@ const ProfilePage = () => {
       } catch (error) {
         console.error(error);
       }
-
-
-
     };
 
     fetchData();
@@ -105,7 +102,7 @@ const ProfilePage = () => {
     icon: "👤",
     location: "New York, NY",
     job: "Software Developer",
-    bio: "Passionate about creating impactful software. Lover of coffee and good books."
+    bio: "Passionate about creating impactful software. Lover of coffee and good books.",
   };
 
   const Button = ({ text, emoji, linkTo }) => {

@@ -26,8 +26,16 @@ function Home() {
   const navigate = useNavigate();
 
   const buttonsContent = [
-    "Electrician", "Plumber", "Mechanic", "Marketing", "Construction",
-    "Gardener", "House Cleaner", "Painter", "Roofer", "Locksmith"
+    "Electrician",
+    "Plumber",
+    "Mechanic",
+    "Marketing",
+    "Construction",
+    "Gardener",
+    "House Cleaner",
+    "Painter",
+    "Roofer",
+    "Locksmith",
   ];
 
   return (
@@ -45,7 +53,10 @@ function Home() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <button className="search-icon-button" onClick={() => navigate("/ShowData", { state: { searchTerm } })}>
+            <button
+              className="search-icon-button"
+              onClick={() => navigate("/ShowData", { state: { searchTerm } })}
+            >
               <FaSearch />
             </button>
           </div>
@@ -61,7 +72,9 @@ function Home() {
             <button
               key={index}
               className="scroll-button"
-              onClick={() => navigate("/showdata", { state: { searchTerm: button } })}
+              onClick={() =>
+                navigate("/showdata", { state: { searchTerm: button } })
+              }
             >
               {button}
             </button>

@@ -11,11 +11,11 @@ import SearchPage from "./pages/SearchPage";
 import DataCard from "./pages/DataCard";
 import ProfilePage from "./pages/ProfilePage";
 import Welcome from "./pages/Welcome";
-import { FavoritesProvider } from "./components/FavoritesProvider";
+
 
 function App() {
   return (
-    <FavoritesProvider>
+    
       <div className="App">
         <Routes>
           <Route path="/" element={<Welcome />} />
@@ -30,7 +30,7 @@ function App() {
           <Route path="/ProfilePage" element={<ProfilePage />} />
         </Routes>
       </div>
-    </FavoritesProvider>
+    
   );
 }
 export default App;

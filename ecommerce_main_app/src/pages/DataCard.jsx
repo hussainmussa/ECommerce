@@ -16,6 +16,7 @@ import { firestore } from '../firebase'; // Import your Firestore instance
 import { collection, query, where, getDocs, doc, updateDoc, getDoc } from "firebase/firestore";
 import { useNavigate } from 'react-router-dom';
 import { MdFavoriteBorder } from "react-icons/md";
+import { getAuth,signOut, onAuthStateChanged } from "firebase/auth";
 
 async function StringToCordination(address) {
   const response = await axios.get(
@@ -33,7 +34,10 @@ async function StringToCordination(address) {
 
 function DataCard() {
   const navigate = useNavigate(); // Declare navigate function
+  const auth = getAuth();
 
+  const [phoneNumber, setPhoneNumber] = useState(null);
+  const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
   const { addFavorite, removeFavorite } = React.useContext(FavoritesContext);
   const location = useLocation();
   const { fullname, country, city, street, streetnumber, phonenumber, rating, documentIdd } = location.state;
@@ -65,11 +69,29 @@ function DataCard() {
       setEditableStreetNumber(data.streetnumber || '');
       setEditableRating(data.rating || '');
       // Add other fields as necessary
-      console.log("there is such document!");
     } else {
       console.log("No such document!");
     }
   };
+
+  useEffect(() => {
+    // Listen for changes in authentication state
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      console.log("is this a user ? " + user.phoneNumber)
+      if (user) {
+        // User is signed in.
+        // Get user's phone number if available
+        setPhoneNumber(user.phoneNumber);
+        console.log("success");
+      } else {
+        // No user is signed in.
+        setPhoneNumber(null);
+        console.log("fail");
+      }
+    });
+        // Clean up subscription on unmount
+        return () => unsubscribe();
+    }, [auth]);
 
   useEffect(() => {
     StringToCordination(city + " " + street + " " + streetnumber)
@@ -78,21 +100,21 @@ function DataCard() {
   }, [city, street, streetnumber]);
 
   useEffect(() => {
-    if (phonenumber === "+16505554567") {
+    if (phonenumber === phoneNumber) {
       setIsEditMode(true);
     }
-  }, [phonenumber]);
+  }, [phonenumber, phoneNumber]);
 
   const handleSave = async () => {
-    console.log("Document IDDDDDDDDDDDD:"); 
+
       //Get query that fits the phone number
     const contractorsRef = collection(firestore, "Contractors");
-    const q = query(contractorsRef, where("phonenumber", "==", "+16505554567"));
+    const q = query(contractorsRef, where("phonenumber", "==", phoneNumber));
+
     const querySnapshot = await getDocs(q);
     //Change the doc
     if (!querySnapshot.empty) {
       const documentId = querySnapshot.docs[0].id; // Get the document ID
-      console.log("Document ID:", documentId); 
     
     const docRef = doc(firestore, 'Contractors', documentId);
     
@@ -111,7 +133,6 @@ function DataCard() {
   if (Object.keys(updates).length > 0) {
     try {
       await updateDoc(docRef, updates);
-      console.log("Document successfully updated");
       setIsEditMode(false); // Exit edit mode
       fetchData(documentId);
     } catch (error) {

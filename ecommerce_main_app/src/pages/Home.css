@@ -114,16 +114,18 @@ button {
 }
 
 .scroll-button {
-  padding: 10px; 
-  margin-bottom: 10px; 
-  background-color: #f0f0f0; 
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #ffffff; /* White background */
   cursor: pointer;
-  border: 0.1px solid #f0f0f0; 
-  border-radius: 5px; 
-  color: #000; 
+  border: none; /* No border */
+  border-radius: 5px;
+  color: #000; /* Black text */
   font-family: "Manrope";
-  
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5); /* Heavy shadow */
 }
+
+
 .search-input-container {
   display: flex;
   align-items: center;

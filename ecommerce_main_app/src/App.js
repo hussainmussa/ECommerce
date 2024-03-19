@@ -10,6 +10,7 @@ import Verification from "./pages/Verification";
 import SearchPage from "./pages/SearchPage";
 import DataCard from "./pages/DataCard";
 import ProfilePage from "./pages/ProfilePage";
+import Welcome from "./pages/Welcome";
 import { FavoritesProvider } from "./components/FavoritesProvider";
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
     <FavoritesProvider>
       <div className="App">
         <Routes>
-          <Route path="/" element={<PhoneAuth />} />
+          <Route path="/" element={<Welcome />} />
           <Route path="/Home" element={<Home />} />
           <Route path="/SignUp" element={<SignUp />} />
           <Route path="/PhoneAuth" element={<PhoneAuth />} />

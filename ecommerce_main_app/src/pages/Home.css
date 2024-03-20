@@ -45,19 +45,6 @@ button {
  
 }
 
-.sign-out-button {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  padding: 10px 20px;
-  font-size: 14px;
-  background-color: #7D4BDB;
-  color: #FFFFFF;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  
-}
 
 .title-search-container {
   display: flex;

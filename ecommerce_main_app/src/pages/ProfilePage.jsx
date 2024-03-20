@@ -167,7 +167,7 @@ const ProfilePage = () => {
               alt="Edit"
               onClick={handleEdit}
               style={{
-                marginTop: "10px",
+                marginTop: "45px",
                 marginLeft: "270px",
                 width: "30px",
                 height: "30px",

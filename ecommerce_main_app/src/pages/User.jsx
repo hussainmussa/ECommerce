@@ -178,7 +178,7 @@ const User = () => {
               </div>
             </div>
           ))}
-          <button type="submit" className="button">Save now</button>
+          <button type="submit" className="button">Save</button>
         </form>
         <a><MdOutlinePhoneIphone size={22} /> : {phoneNumber}</a>
       </div>

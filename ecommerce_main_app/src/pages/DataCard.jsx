@@ -295,7 +295,7 @@ function DataCard() {
   return (
     <div className="BG-container">
       <div className="mainContainer">
-        <span className="body">Job details</span>
+        <span className="body"></span>
         <div>
           <img src={myImage} alt="Job" className="jobImage" />
           <div className="icon-container">

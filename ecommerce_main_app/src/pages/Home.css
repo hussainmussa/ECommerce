@@ -147,10 +147,10 @@ input[type="text"] {
 }
 
 .main-logo {
-  top: 15px;
-  width: 160px; /* Adjust the width as needed */
+  top: 60px;
+  width: 120px; /* Adjust the width as needed */
   height: auto; /* Automatically adjust height to maintain aspect ratio */
- 
+ margin-bottom: 50px;
   
 }
 

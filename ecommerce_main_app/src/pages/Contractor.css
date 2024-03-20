@@ -33,7 +33,7 @@
 
 .form-field {
   margin-bottom: 15px;
-  font-family: Arial;
+  font-family: "Inter-Regular", Helvetica;
   font-size: 20px;
 }
 
@@ -49,7 +49,7 @@
   border-radius: 8px;
   box-sizing: border-box;
   font-size: 25px;
-  font-family: "Times New Roman"; /* Add this line to change the font */
+  font-family: "Inter-Regular", Helvetica; /* Add this line to change the font */
   margin: 0 auto; /* Center the input field */
   display: block; /* Needed for margin: 0 auto to work */
 }

@@ -40,7 +40,7 @@ button {
   height: auto; /* Let the browser calculate the height */
   margin: 10vh auto; /* Use viewport height for top margin, auto for right and left to center the element */
   color: #000000;
-  font-family: "Manrope";
+  font-family: "Inter-Regular", Helvetica;
   font-size: 5vw; /* Use viewport width for font size */
   font-weight: 400;
   line-height: 1.2; /* Use unitless value for line height */
@@ -67,7 +67,7 @@ button {
   position: relative;
   width: calc(100% - 80px); /* Adjust width to account for margins */
   color: #000000;
-  font-family: "Manrope";
+  font-family: "Inter-Regular", Helvetica;
   font-size: 4vw; /* Use viewport width for font size */
   font-weight: 400;
   line-height: 1.2; /* Use unitless value for line height */
@@ -87,7 +87,7 @@ button {
   position: relative;
   width: 65%; /* Adjust width to account for margins */
   color: #000000;
-  font-family: "Manrope";
+  font-family: "Inter-Regular", Helvetica;
   font-size: 4vw; /* Use viewport width for font size */
   font-weight: 400;
   line-height: 1.2; /* Use unitless value for line height */

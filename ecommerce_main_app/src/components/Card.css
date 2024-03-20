@@ -42,7 +42,7 @@
   font-weight: bold; /* Optionally set the name font to bold */
   color: rgb(56, 0, 60);
   font-size:larger;
-  font-family: "Lato";
+  font-family: "Inter-Regular", Helvetica;
   align-items: "left";
 }
   

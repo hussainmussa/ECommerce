@@ -11,6 +11,7 @@ import {
     doc,
     updateDoc,
     getDoc } from "firebase/firestore";
+import { MdOutlinePhoneIphone } from "react-icons/md";
 
 
 const User = () => {
@@ -179,7 +180,7 @@ const User = () => {
           ))}
           <button type="submit" className="button">Save now</button>
         </form>
-        <a>📱 : {phoneNumber}</a>
+        <a><MdOutlinePhoneIphone size={22} /> : {phoneNumber}</a>
       </div>
       <BottomBar />
     </div>

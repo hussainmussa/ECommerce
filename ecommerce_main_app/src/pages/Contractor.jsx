@@ -9,7 +9,6 @@ const Contractor = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { phoneNumber } = location.state || {};
-
   const [inputFields, setInputFields] = useState([
     { id: 1, label: "fullname", value: "", error: "" },
     { id: 2, label: "country", value: "", error: "" },
@@ -85,8 +84,9 @@ const Contractor = () => {
 
   return (
     <div className="BG-container">
+      <h2>Contractor Registration</h2>
       <div className="contractor-container">
-        <h2>Contractor Registration</h2>
+        
         <form onSubmit={handleSave}>
           {inputFields.map((field) => (
             <div key={field.id} className="form-field">
@@ -106,7 +106,7 @@ const Contractor = () => {
               </div>
             </div>
           ))}
-          <button type="submit" className="button">Save now</button>
+          <button type="submit" className="button1">Save now</button>
         </form>
       </div>
       <BottomBar />

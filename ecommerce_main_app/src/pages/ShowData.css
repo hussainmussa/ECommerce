@@ -28,6 +28,7 @@
   flex-wrap: wrap;
   justify-content: center;
   width: 105%;
+  min-height: 450px;
   max-height: 580px; /* Set a specific height */
   overflow-y: auto; /* Enable vertical scrolling */
 }

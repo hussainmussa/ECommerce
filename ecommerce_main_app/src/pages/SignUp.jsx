@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./SignUp.css"; // Import external CSS file
 import { useNavigate } from "react-router-dom"; // Import useNavigate hook
-import axios from "axios"; // Import axios for making HTTP requests
+
 
 function SignUp() {
   const initialState = ["First Name", "Last Name", "Phone Number", "ID"];

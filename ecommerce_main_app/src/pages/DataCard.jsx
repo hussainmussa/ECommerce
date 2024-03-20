@@ -21,7 +21,6 @@ import {
 } from "firebase/firestore";
 import { deleteDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-import { MdFavoriteBorder } from "react-icons/md";
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 import trashCan from "../images/trash-bin.png";
 import save from "../images/check.png";
@@ -49,7 +48,7 @@ function DataCard() {
     streetnumber,
     phonenumber,
     rating,
-    documentIdd,
+    
   } = location.state;
   const [locationCor, setLocationCor] = useState([0, 0]);
   const [isHeartFilled, setHeartFilled] = useState(false);

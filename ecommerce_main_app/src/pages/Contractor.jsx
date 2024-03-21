@@ -25,13 +25,10 @@ const Contractor = () => {
   const handleSave = async (e) => {
     e.preventDefault();
 
-    const newInputFields = inputFields.map((field) => {
-      if (field.value.trim() === "") {
-        return { ...field, error: "This field is required" };
-      } else {
-        return { ...field, error: "" };
-      }
-    });
+    const newInputFields = inputFields.map((field) => ({
+      ...field,
+      error: field.value.trim() === "" ? "This field is required" : "",
+    }));
 
     setInputFields(newInputFields);
 
@@ -47,9 +44,7 @@ const Contractor = () => {
 
     try {
       await addDoc(ref, data);
-      setInputFields(
-        inputFields.map((field) => ({ ...field, value: "", error: "" }))
-      );
+      setInputFields(inputFields.map((field) => ({ ...field, value: "", error: "" })));
     } catch (error) {
       console.error(error);
     }
@@ -57,27 +52,18 @@ const Contractor = () => {
   };
 
   const handleChange = (e, id) => {
-    const newInputFields = inputFields.map((field) => {
-      if (field.id === id) {
-        let value = e.target.value;
+    const { value } = e.target;
 
-        if (
-          ["fullname", "country", "city", "street", "jobfield"].includes(
-            field.label
-          )
-        ) {
-          value = value.replace(/[^a-zA-Z\s]/g, "");
-        }
-
-        if (["phonenumber", "ID", "streetnumber"].includes(field.label)) {
-          value = value.replace(/[^0-9]/g, "");
-        }
-
-        return { ...field, value: value };
-      }
-
-      return field;
-    });
+    const newInputFields = inputFields.map((field) => ({
+      ...field,
+      value: field.id === id ? 
+             (["fullname", "country", "city", "street", "jobfield"].includes(field.label) ?
+               value.replace(/[^a-zA-Z\s]/g, "") :
+               (["phonenumber", "ID", "streetnumber"].includes(field.label) ?
+                 value.replace(/[^0-9]/g, "") :
+                 value))
+             : field.value
+    }));
 
     setInputFields(newInputFields);
   };

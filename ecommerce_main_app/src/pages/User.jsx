@@ -1,18 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { firestore } from "../firebase";
-import { addDoc, collection } from "@firebase/firestore";
+import { addDoc, collection, query, where, getDocs, doc, updateDoc, getDoc } from "firebase/firestore";
+import { MdOutlinePhoneIphone } from "react-icons/md";
 import "./User.css"; 
 import BottomBar from "../components/BottomBar";
 import { useLocation, useNavigate } from "react-router-dom";
-import { 
-    query,
-    where,
-    getDocs,
-    doc,
-    updateDoc,
-    getDoc } from "firebase/firestore";
-import { MdOutlinePhoneIphone } from "react-icons/md";
-
 
 const User = () => {
   const location = useLocation();
@@ -22,49 +14,42 @@ const User = () => {
 
   const [inputFields, setInputFields] = useState([
     { id: 1, label: "name", value: name, error: "" },
-    { id: 2, label: "userLocation", value: userLocation, error: "" },
+    { id: 2, label: "city", value: userLocation, error: "" },
     { id: 3, label: "job", value: job, error: "" },
     { id: 4, label: "bio", value: bio, error: "" },
   ]);
 
-  
   useEffect(() => {
     const fetchUserData = async () => {
+      const contractorsRef = collection(firestore, "Users");
+      const q = query(contractorsRef, where("phonenumber", "==", phoneNumber));
 
+      const querySnapshot = await getDocs(q);
 
-    //Get query that fits the phone number
-    const contractorsRef = collection(firestore, "Users");
-    const q = query(contractorsRef, where("phonenumber", "==", phoneNumber));
+      if (!querySnapshot.empty) {
+        const documentId = querySnapshot.docs[0].id; 
 
-    const querySnapshot = await getDocs(q);
-    //Change the doc
-    if (!querySnapshot.empty) {
-      const documentId = querySnapshot.docs[0].id; // Get the document ID
-    
-
-
-      const docRef = doc(firestore, "Users", documentId); // Replace "yourDocumentId" with the actual ID
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        setInputFields([
-          { id: 1, label: "name", value: docSnap.data().name, error: "" },
-          { id: 2, label: "userLocation", value: docSnap.data().location, error: "" },
-          { id: 3, label: "job", value: docSnap.data().job, error: "" },
-          { id: 4, label: "bio", value: docSnap.data().bio, error: "" },
-        ]);
+        const docRef = doc(firestore, "Users", documentId); 
+        const docSnap = await getDoc(docRef);
+        
+        if (docSnap.exists()) {
+          setInputFields([
+            { id: 1, label: "name", value: docSnap.data().name, error: "" },
+            { id: 2, label: "city", value: docSnap.data().location, error: "" },
+            { id: 3, label: "job", value: docSnap.data().job, error: "" },
+            { id: 4, label: "bio", value: docSnap.data().bio, error: "" },
+          ]);
+        } else {
+          console.log("No such document!");
+        }
       } else {
-        console.log("No such document!");
-      }
-    }else {
         console.log("No such document!");
       }
     };
   
     fetchUserData();
-  }, []); // Empty dependency array means this runs once on mount
+  }, []); 
   
-
-
   const handleSave = async (e) => {
     e.preventDefault();
     
@@ -94,30 +79,25 @@ const User = () => {
     data["phonenumber"] = phoneNumber;
 
     try {
-    //Get query that fits the phone number
-    const contractorsRef = collection(firestore, "Users");
-    const q = query(contractorsRef, where("phonenumber", "==", phoneNumber));
+      const contractorsRef = collection(firestore, "Users");
+      const q = query(contractorsRef, where("phonenumber", "==", phoneNumber));
+      const querySnapshot = await getDocs(q);
 
-    const querySnapshot = await getDocs(q);
-    //Change the doc
-    if (!querySnapshot.empty) {
-      const documentId = querySnapshot.docs[0].id; // Get the document ID
-    
-
+      if (!querySnapshot.empty) {
+        const documentId = querySnapshot.docs[0].id; 
         const docRef = doc(firestore, "Users", documentId); 
+
         const docSnap = await getDoc(docRef);
+
         if (docSnap.exists()) {
-            console.log(data);
             await updateDoc(docRef, data);
-        }else {
-            console.log("No such document!");
+        } else {
             await addDoc(docRef, data);
           }
-  } else {
-          console.log("No such document!");
-          const ref = collection(firestore, "Users");
-          await addDoc(ref, data);
-        }
+      } else {
+        const ref = collection(firestore, "Users");
+        await addDoc(ref, data);
+      }
 
       setInputFields(
         inputFields.map((field) => ({ ...field, value: "", error: "" }))
@@ -157,7 +137,7 @@ const User = () => {
   return (
     <div className="BG-container">
       <div className="user-container">
-        <h2>Update user info</h2>
+        <h2>Edit your profile</h2>
 
         <form onSubmit={handleSave}>
           {inputFields.map((field) => (

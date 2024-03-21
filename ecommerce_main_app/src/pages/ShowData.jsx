@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { firestore } from "../firebase";
 import { collection, getDocs } from "@firebase/firestore";
-import "./ShowData.css"; // Import external CSS file
+import "./ShowData.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import Select from "../components/Select";
 import Card from "../components/Card";
@@ -16,18 +16,15 @@ const ShowData = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
   const [fuse, setFuse] = useState(null);
-
   const location = useLocation();
+
   useEffect(() => {
     if (location.state?.searchTerm) {
       setSearchTerm(location.state.searchTerm);
     }
     const fetchData = async () => {
       try {
-        const querySnapshot = await getDocs(
-          collection(firestore, "Contractors")
-        );
-        console.log(querySnapshot); // Log the snapshot to check the structure
+        const querySnapshot = await getDocs(collection(firestore, "Contractors"));
         const newData = [];
         querySnapshot.forEach((doc) => {
           newData.push({ id: doc.id, ...doc.data() });
@@ -37,7 +34,6 @@ const ShowData = () => {
         console.error(error);
       }
     };
-
     fetchData();
   }, [location.state?.searchTerm]);
 
@@ -47,7 +43,6 @@ const ShowData = () => {
       includeScore: true,
       threshold: 0.3,
     });
-
     setFuse(fuseInstance);
   }, [data]);
 
@@ -70,29 +65,12 @@ const ShowData = () => {
   const jobFields = [...new Set(data.map((item) => item["jobfield"]))];
 
   const selects = [
-    {
-      value: selectedCountry,
-      setValue: setSelectedCountry,
-      options: countries,
-      defaultOption: "Country",
-    },
-    {
-      value: selectedCity,
-      setValue: setSelectedCity,
-      options: cities,
-      defaultOption: "City",
-    },
-    {
-      value: selectedJobField,
-      setValue: setSelectedJobField,
-      options: jobFields,
-      defaultOption: "Job Field",
-    },
+    { value: selectedCountry, setValue: setSelectedCountry, options: countries, defaultOption: "Country" },
+    { value: selectedCity, setValue: setSelectedCity, options: cities, defaultOption: "City" },
+    { value: selectedJobField, setValue: setSelectedJobField, options: jobFields, defaultOption: "Job Field" },
   ];
 
-  const results = searchTerm
-    ? fuse.search(searchTerm)
-    : data.map((item) => ({ item }));
+  const results = searchTerm ? fuse.search(searchTerm) : data.map((item) => ({ item }));
 
   return (
     <div className="BG-container">
@@ -103,9 +81,7 @@ const ShowData = () => {
             type="text"
             placeholder="Type to search..."
             value={searchTerm}
-            onChange={(e) => {
-              setSearchTerm(e.target.value);
-            }}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
           <div className="title-search-container_row">
             {selects.map((select, index) => (
@@ -124,22 +100,12 @@ const ShowData = () => {
           {results
             .filter(
               (result) =>
-                (selectedCountry === "" ||
-                  result.item.country.toLowerCase() ===
-                    selectedCountry.toLowerCase()) &&
-                (selectedCity === "" ||
-                  result.item.city.toLowerCase() ===
-                    selectedCity.toLowerCase()) &&
-                (selectedJobField === "" ||
-                  result.item["jobfield"].toLowerCase() ===
-                    selectedJobField.toLowerCase())
+                (selectedCountry === "" || result.item.country.toLowerCase() === selectedCountry.toLowerCase()) &&
+                (selectedCity === "" || result.item.city.toLowerCase() === selectedCity.toLowerCase()) &&
+                (selectedJobField === "" || result.item["jobfield"].toLowerCase() === selectedJobField.toLowerCase())
             )
             .map((result) => (
-              <Card
-                key={result.item.id}
-                item={result.item}
-                handleClick={handleClick}
-              />
+              <Card key={result.item.id} item={result.item} handleClick={handleClick} />
             ))}
         </div>
       </div>

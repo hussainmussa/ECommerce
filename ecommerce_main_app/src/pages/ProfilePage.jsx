@@ -1,10 +1,10 @@
 import "./ProfilePage.css"; // Import the CSS file for styling
 import BottomBar from "../components/BottomBar";
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { firestore } from "../firebase";
 import { collection, getDocs } from "@firebase/firestore";
 import "./ShowData.css"; // Import external CSS file
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Card from "../components/Card";
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 import pen from '../images/pen.png';
@@ -20,8 +20,7 @@ const ProfilePage = () => {
   const navigate = useNavigate();
   const auth = getAuth();
   const [phoneNumber, setPhoneNumber] = useState(null);
-  
-  
+
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
@@ -93,13 +92,9 @@ const ProfilePage = () => {
   const filteredData = data.filter(item => 
     item["phonenumber"] === phoneNumber);
 
-
-  
   const navigateToContractorApplication = () => {
     navigate("/contractor", { state: { phoneNumber: phoneNumber } });
   };
-
-
 
   const defaultProfileData = {
     name: "Unknown",
@@ -109,22 +104,19 @@ const ProfilePage = () => {
     bio: "No bio available.",
   };
   
-    const [profileData, setProfileData] = useState(defaultProfileData);
+  const [profileData, setProfileData] = useState(defaultProfileData);
   
-    useEffect(() => {
-      const fetchProfileData = async () => {
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      const contractorsRef = collection(firestore, "Users");
+      const q = query(contractorsRef, where("phonenumber", "==", phoneNumber));
+      const querySnapshot = await getDocs(q);
 
-        const contractorsRef = collection(firestore, "Users");
-        const q = query(contractorsRef, where("phonenumber", "==", phoneNumber));
-    
-        const querySnapshot = await getDocs(q);
-
-        if (!querySnapshot.empty) {
-            const documentId = querySnapshot.docs[0].id;
-        
+      if (!querySnapshot.empty) {
+        const documentId = querySnapshot.docs[0].id;
         const docRef = doc(firestore, "Users", documentId);
         const docSnap = await getDoc(docRef);
-  
+
         if (docSnap.exists()) {
           const data = docSnap.data();
           setProfileData({
@@ -135,80 +127,66 @@ const ProfilePage = () => {
             bio: data.bio || defaultProfileData.bio,
           });
         } else {
-            console.log("No such document! Displaying default profile.");
-          }
-        } else {
           console.log("No such document! Displaying default profile.");
         }
-      };
-  
-      fetchProfileData();
-    }, [phoneNumber]);
-  const Button = ({ text, emoji, linkTo }) => {
-    return (
-      <button
-        className="rectangle"
-        onClick={() => linkTo && window.location.assign(linkTo)}
-      >
-        <span>{text}</span>
-      </button>
-    );
-  };
+      } else {
+        console.log("No such document! Displaying default profile.");
+      }
+    };
+
+    fetchProfileData();
+  }, [phoneNumber]);
 
   return (
-    
     <div className="BG-container">
       <button className="sign-out-button" onClick={handleSignOut}>
-          <span className="sign-out">Sign out</span>
-        </button>
-    <div className="profile-container">
-    <img
-              src={pen}
-              alt="Edit"
-              onClick={handleEdit}
-              style={{
-                marginTop: "45px",
-                marginLeft: "270px",
-                width: "30px",
-                height: "30px",
-              }}
-            />
-      <div className="profile-icon">{profileData.icon}</div>
-      <div className="profile-name">{profileData.name}</div>
-      <div className="profile-info">
-        <strong>Location:</strong> {profileData.location}
-      </div>
-      <div className="profile-info">
-        <strong>Job:</strong> {profileData.job}
-      </div>
-      <div className="profile-bio">{profileData.bio}</div>
-
-
-<button onClick={navigateToContractorApplication} className="button-auth">
-Add Bussiness
+        <span className="sign-out">Sign out</span>
       </button>
+      <div className="profile-container">
+        <img
+          src={pen}
+          alt="Edit"
+          onClick={handleEdit}
+          style={{
+            marginTop: "45px",
+            marginLeft: "270px",
+            width: "30px",
+            height: "30px",
+          }}
+        />
+        <div className="profile-icon">{profileData.icon}</div>
+        <div className="profile-name">{profileData.name}</div>
+        <div className="profile-info">
+          <strong>Location:</strong> {profileData.location}
+        </div>
+        <div className="profile-info">
+          <strong>Job:</strong> {profileData.job}
+        </div>
+        <div className="profile-bio">{profileData.bio}</div>
 
-      <div className="profile-bio">Bussinesses for {phoneNumber}:</div>
+        <button onClick={navigateToContractorApplication} className="button-auth">
+          Add Business
+        </button>
 
-      <div className="data-card-container">
-  {filteredData
-    .filter(
-      (item) =>
-        (item["fullname"].toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item["jobfield"].toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item["country"].toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item["city"].toLowerCase().includes(searchTerm.toLowerCase())) &&
-     
-        (selectedCountry === "" || item["country"].toLowerCase() === selectedCountry.toLowerCase()) &&
-        (selectedCity === "" || item["city"].toLowerCase() === selectedCity.toLowerCase()) &&
-        (selectedJobField === "" || item["jobfield"].toLowerCase() === selectedJobField.toLowerCase())
-    )
-    .map((item) => (
-      <Card key={item.id} item={item} handleClick={handleClick} />
-    ))}
-</div>
+        <div className="profile-bio">Businesses for {phoneNumber}:</div>
 
-</div>
+        <div className="data-card-container">
+          {filteredData
+            .filter(
+              (item) =>
+                (item["fullname"].toLowerCase().includes(searchTerm.toLowerCase()) ||
+                item["jobfield"].toLowerCase().includes(searchTerm.toLowerCase()) ||
+                item["country"].toLowerCase().includes(searchTerm.toLowerCase()) ||
+                item["city"].toLowerCase().includes(searchTerm.toLowerCase())) &&
+                (selectedCountry === "" || item["country"].toLowerCase() === selectedCountry.toLowerCase()) &&
+                (selectedCity === "" || item["city"].toLowerCase() === selectedCity.toLowerCase()) &&
+                (selectedJobField === "" || item["jobfield"].toLowerCase() === selectedJobField.toLowerCase())
+            )
+            .map((item) => (
+              <Card key={item.id} item={item} handleClick={handleClick} />
+            ))}
+        </div>
+      </div>
       <BottomBar/>
     </div>
   );

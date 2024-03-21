@@ -9,7 +9,7 @@ import { IoStarOutline, IoStar } from "react-icons/io5";
 import { IoCall } from "react-icons/io5";
 import { useLocation } from "react-router-dom";
 import BottomBar from "../components/BottomBar";
-import { firestore } from "../firebase"; // Import your Firestore instance
+import { firestore } from "../firebase"; 
 import {
   collection,
   query,
@@ -21,7 +21,7 @@ import {
 } from "firebase/firestore";
 import { deleteDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import trashCan from "../images/trash-bin.png";
 import save from "../images/check.png";
 
@@ -38,7 +38,7 @@ async function StringToCordination(address) {
 }
 
 function DataCard() {
-  const navigate = useNavigate(); // Declare navigate function
+  const navigate = useNavigate(); 
   const location = useLocation();
   const {
     fullname,
@@ -66,19 +66,13 @@ function DataCard() {
   const [UserphoneNumber, setUserPhoneNumber] = useState(null);
 
   useEffect(() => {
-    // Listen for changes in authentication state
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        // User is signed in.
-        // Get user's phone number if available
         setUserPhoneNumber(user.UserphoneNumber);
       } else {
-        // No user is signed in.
         setUserPhoneNumber(null);
       }
     });
-
-    // Clean up subscription on unmount
     return () => unsubscribe();
   }, [auth]);
 
@@ -88,21 +82,18 @@ function DataCard() {
 
     if (docSnap.exists()) {
       const data = docSnap.data();
-      // Update your component's state with the fetched data
       setEditableFullname(data.fullname);
       setEditableCountry(data.country || "");
       setEditableCity(data.city || "");
       setEditableStreet(data.street || "");
       setEditableStreetNumber(data.streetnumber || "");
       setEditableRating(data.rating || "");
-      // Add other fields as necessary
     } else {
       console.log("No such document!");
     }
   };
 
   const calculateAverageRating = async () => {
-    // Get all ratings for the contractor
     const contractorsRef = collection(firestore, "Contractors");
     const q = query(contractorsRef, where("phonenumber", "==", phonenumber));
     const querySnapshot = await getDocs(q);
@@ -111,7 +102,6 @@ function DataCard() {
       const contractorData = querySnapshot.docs[0].data();
       if (contractorData && contractorData.rating) {
         const ratings = contractorData.rating;
-        console.log("braa log: " + ratings);
         const ratingValues = Object.values(ratings).map(
           (rating) => rating.rating
         );
@@ -120,25 +110,19 @@ function DataCard() {
         const averageRatingWithTwoDecimals = averageRating.toFixed(2);
         setEditableRating(averageRatingWithTwoDecimals);
       } else {
-        // Handle the case where ratings data is undefined
         console.log("Ratings data is undefined");
       }
     }
   };
 
   useEffect(() => {
-    // Listen for changes in authentication state
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        // User is signed in.
-        // Get user's phone number if available
         setPhoneNumber(user.phoneNumber);
       } else {
-        // No user is signed in.
         setPhoneNumber(null);
       }
     });
-    // Clean up subscription on unmount
     return () => unsubscribe();
   }, [auth]);
 
@@ -147,21 +131,13 @@ function DataCard() {
   }, [phonenumber]);
 
   useEffect(() => {
-    // Listen for changes in authentication state
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      console.log("is this a user ? " + user.phoneNumber);
       if (user) {
-        // User is signed in.
-        // Get user's phone number if available
         setPhoneNumber(user.phoneNumber);
-        console.log("success");
       } else {
-        // No user is signed in.
         setPhoneNumber(null);
-        console.log("fail");
       }
     });
-    // Clean up subscription on unmount
     return () => unsubscribe();
   }, [auth]);
 
@@ -185,37 +161,27 @@ function DataCard() {
   }, [phonenumber, phoneNumber]);
 
   const handleRatingClick = async (ratingNumber) => {
-    // Get the document that fits the phone number
     const contractorsRef = collection(firestore, "Contractors");
     const q = query(contractorsRef, where("phonenumber", "==", phonenumber));
     const querySnapshot = await getDocs(q);
 
-    // Update the document
     if (!querySnapshot.empty) {
-      const documentId = querySnapshot.docs[0].id; // Get the document ID
+      const documentId = querySnapshot.docs[0].id; 
       const docRef = doc(firestore, "Contractors", documentId);
-
-      // Get the current document
       const docSnap = await getDoc(docRef);
       const data = docSnap.data();
-
-      // Object to hold the updates
       let updates = {};
-      console.log(phoneNumber);
-      // Check if the user's phone number is already in the rating list
+
       if (data.rating && data.rating[phoneNumber]) {
-        // If it exists, just update the rating
         updates[`rating.${phoneNumber}`] = {
           rating: ratingNumber,
         };
       } else {
-        // If it doesn't exist, add the user's phone number and rating to the rating attribute
         updates[`rating.${phoneNumber}`] = {
           rating: ratingNumber,
         };
       }
 
-      // Update the document
       try {
         await updateDoc(docRef, updates);
         console.log("Document successfully updated");
@@ -227,17 +193,13 @@ function DataCard() {
   };
 
   const handleDelete = async () => {
-    // Get query that fits the phone number
     const contractorsRef = collection(firestore, "Contractors");
     const q = query(contractorsRef, where("phonenumber", "==", phoneNumber));
 
     const querySnapshot = await getDocs(q);
-    // Check if the query returned documents
     if (!querySnapshot.empty) {
-      const documentId = querySnapshot.docs[0].id; // Get the document ID
-
+      const documentId = querySnapshot.docs[0].id; 
       try {
-        // Use deleteDoc to delete the document
         await deleteDoc(doc(firestore, "Contractors", documentId));
         console.log("Document successfully deleted!");
       } catch (error) {
@@ -248,21 +210,16 @@ function DataCard() {
   };
 
   const handleSave = async () => {
-    //Get query that fits the phone number
+
     const contractorsRef = collection(firestore, "Contractors");
     const q = query(contractorsRef, where("phonenumber", "==", phoneNumber));
 
     const querySnapshot = await getDocs(q);
-    //Change the doc
     if (!querySnapshot.empty) {
-      const documentId = querySnapshot.docs[0].id; // Get the document ID
-    
+      const documentId = querySnapshot.docs[0].id;
       const docRef = doc(firestore, "Contractors", documentId);
-
-      // Object to hold the updates
       let updates = {};
 
-      // Check each field for changes and add to updates object if changed
       if (fullname !== editableFullname) updates.fullname = editableFullname;
       if (country !== editableCountry) updates.country = editableCountry;
       if (city !== editableCity) updates.city = editableCity;
@@ -271,11 +228,10 @@ function DataCard() {
         updates.streetnumber = editableStreetNumber;
       if (rating !== editableRating) updates.rating = editableRating;
 
-      // Check if updates object is not empty
       if (Object.keys(updates).length > 0) {
         try {
           await updateDoc(docRef, updates);
-          setIsEditMode(false); // Exit edit mode
+          setIsEditMode(false);
           fetchData(documentId);
         } catch (error) {
           console.error("Error updating document: ", error);
@@ -283,7 +239,7 @@ function DataCard() {
       } else {
         console.log("No changes detected, no update performed");
       }
-      setIsEditMode(false); // Exit edit mode after saving
+      setIsEditMode(false);
       navigate("/ProfilePage");
     }
   };
@@ -391,7 +347,7 @@ function DataCard() {
             <div className="info-item">Rating: {editableRating} stars</div>
           </div>
         </pre>
-        {/*<p className="jobDetails">{services}</p>*/}
+
         <div className="MapsIconContainer">
           <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer">
             <img src={googleMapsIcon} alt="Google Maps" className="MapsIcon" />
@@ -403,30 +359,28 @@ function DataCard() {
             <img src={appleMapsIcon} alt="Apple Maps" className="MapsIcon" />
           </a>
         </div>
+
         {isEditMode && (
-          <>
-            <img
-              src={save}
-              alt="Edit"
-              onClick={handleSave}
-              style={{ marginTop: "10px", width: "40px", height: "40px" }}
-            />
-          </>
+          <img
+            src={save}
+            alt="Edit"
+            onClick={handleSave}
+            style={{ marginTop: "10px", width: "40px", height: "40px" }}
+          />
         )}
+
         {isEditMode && (
-          <>
-            <img
-              src={trashCan}
-              alt="Edit"
-              onClick={handleDelete}
-              style={{
-                marginTop: "10px",
-                marginLeft: "150px",
-                width: "40px",
-                height: "40px",
-              }}
-            />
-          </>
+          <img
+            src={trashCan}
+            alt="Edit"
+            onClick={handleDelete}
+            style={{
+              marginTop: "10px",
+              marginLeft: "150px",
+              width: "40px",
+              height: "40px",
+            }}
+          />
         )}
       </div>
       <BottomBar />
@@ -435,3 +389,4 @@ function DataCard() {
 }
 
 export default DataCard;
+

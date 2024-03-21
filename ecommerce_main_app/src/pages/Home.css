@@ -9,8 +9,7 @@
   height: 100vh;
   margin: 0 auto;
   font-size: 0;
-  
- }
+}
 
 .main-container,
 .main-container * {
@@ -41,10 +40,7 @@ button {
   text-align: center;
   white-space: nowrap;
   z-index: 14;
-  
- 
 }
-
 
 .title-search-container {
   display: flex;
@@ -52,7 +48,6 @@ button {
   justify-content: center;
   width: 50px;
   bottom: 40px;
-  
 }
 
 .help-section {
@@ -61,7 +56,6 @@ button {
   justify-content: center;
   width: 100%;
   margin: 40px 0;
-  
 }
 
 .line {
@@ -79,10 +73,8 @@ button {
   position: relative;
   top: -1px;
   font-family: "Inter-Regular", Helvetica;
-  font-weight: bold; 
-  
+  font-weight: bold;
 }
-
 
 .scroll-container {
   display: flex;
@@ -93,37 +85,32 @@ button {
   padding: 10px;
   border-radius: 10px;
   scrollbar-width: none;
-  font-family:"Inter-Regular", Helvetica;
+  font-family: "Inter-Regular", Helvetica;
   bottom: 100px;
   margin-top: 50px;
-
 }
 
 .scroll-container::-webkit-scrollbar {
   display: none;
-  
-  
 }
 
 .scroll-button {
   padding: 10px;
   margin-bottom: 10px;
-  background-color: #ffffff; /* White background */
+  background-color: #ffffff;
   cursor: pointer;
-  border: none; /* No border */
+  border: none;
   border-radius: 5px;
-  color: #000; /* Black text */
+  color: #000;
   font-family: "Inter-Regular", Helvetica;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5); /* Heavy shadow */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
 }
-
 
 .search-input-container {
   display: flex;
   align-items: center;
-  justify-content: center; /* Center the content horizontally */
+  justify-content: center;
   position: relative;
-  
 }
 
 .search-icon-button {
@@ -133,9 +120,8 @@ button {
   padding: 0;
   outline: 1;
   position: absolute;
-  right: 10px; /* Adjust this value if needed */
+  right: 10px;
   color: #727272;
-  
 }
 
 .search-icon-button:focus {
@@ -143,15 +129,11 @@ button {
 }
 
 input[type="text"] {
-  padding-right: 30px; /* Adjust as needed to make space for the icon */
+  padding-right: 30px;
 }
 
 .main-logo {
-  top: 60px;
-  width: 120px; /* Adjust the width as needed */
-  height: auto; /* Automatically adjust height to maintain aspect ratio */
- margin-bottom: 50px;
-  
+  top: 15px;
+  width: 140px;
+  height: auto;
 }
-
-

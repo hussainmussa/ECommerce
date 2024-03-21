@@ -15,7 +15,6 @@
 .data-card {
   flex: 0 0 auto;
   margin: 15px;
-  display: flex;
   flex-direction: column;
   align-items: start;
   justify-content: center;
@@ -39,12 +38,12 @@
 
 
 .data-value.name {
-  font-weight: bold; /* Optionally set the name font to bold */
+  font-weight: bold; 
   color: rgb(56, 0, 60);
   font-size:larger;
   font-family: "Inter-Regular", Helvetica;
   align-items: "left";
 }
   
-  /* Add additional styles as needed */
+  
   

@@ -1,8 +1,5 @@
 :root {
-  --default-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Ubuntu, "Helvetica Neue", Helvetica, Arial, "PingFang SC",
-    "Hiragino Sans GB", "Microsoft Yahei UI", "Microsoft Yahei",
-    "Source Han Sans CN", sans-serif;
+  --default-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft Yahei UI", "Microsoft Yahei", "Source Han Sans CN", sans-serif;
 }
 
 .mainContainer {
@@ -12,7 +9,7 @@
 .mainContainer,
 .mainContainer * {
   box-sizing: border-box;
-  position: relative; /* Ensure the parent container has a position property */
+  position: relative;
 }
 
 input,
@@ -24,10 +21,10 @@ button {
 
 .mainContainer {
   position: relative;
-  width: 100%; /* Use percentage for width */
-  height: 100vh; /* Use viewport height for height */
+  width: 100%;
+  height: 100vh;
   margin: 0 auto;
-  font-size: 0px;
+  font-size: 0;
   overflow: hidden;
 }
 
@@ -36,14 +33,14 @@ button {
   align-items: center;
   justify-content: center;
   position: relative;
-  width: 80%; /* Use percentage for width */
-  height: auto; /* Let the browser calculate the height */
-  margin: 10vh auto; /* Use viewport height for top margin, auto for right and left to center the element */
+  width: 80%;
+  height: auto;
+  margin: 10vh auto;
   color: #000000;
   font-family: "Inter-Regular", Helvetica;
-  font-size: 5vw; /* Use viewport width for font size */
+  font-size: 5vw;
   font-weight: 400;
-  line-height: 1.2; /* Use unitless value for line height */
+  line-height: 1.2;
   text-align: center;
   white-space: nowrap;
   z-index: 15;
@@ -51,76 +48,66 @@ button {
   margin-top: 5vh;
 }
 
-/* Job image styles */
 .jobImage {
-  width: 100px; /* Set a fixed width for the circular image */
-  height: 100px; /* Set a fixed height for the circular image */
-  border-radius: 50%; /* Make it round */
-  overflow: hidden; /* Hide overflow content */
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
   margin-right: 180px;
 }
 
-.jobDetails {
+.jobDetails,
+.jobDetails1 {
   display: flex;
-  align-items: flex-start; /* Align items to the start */
+  align-items: flex-start;
   justify-content: left;
   position: relative;
-  width: calc(100% - 80px); /* Adjust width to account for margins */
   color: #000000;
   font-family: "Inter-Regular", Helvetica;
-  font-size: 4vw; /* Use viewport width for font size */
+  font-size: 4vw;
   font-weight: 400;
-  line-height: 1.2; /* Use unitless value for line height */
-  text-align: justify; /* Justify text */
+  line-height: 1.2;
+  text-align: justify;
   z-index: 15;
-  margin: 3vh 40px; /* Add top and right margin */
-  max-height: 400px; /* Limit height */
-  overflow-y: auto; /* Add vertical scrollbar when necessary */
-  overflow-wrap: break-word; /* Break words to prevent overflow */
+  margin: 3vh 40px;
+  overflow-wrap: break-word;
+}
+
+.jobDetails {
+  width: calc(100% - 80px);
+  max-height: 400px;
+  overflow-y: auto;
   border: 0px solid #000000;
 }
 
 .jobDetails1 {
-  display: flex;
-  align-items: flex-start; /* Align items to the start */
-  justify-content: left;
-  position: relative;
-  width: 65%; /* Adjust width to account for margins */
-  color: #000000;
-  font-family: "Inter-Regular", Helvetica;
-  font-size: 4vw; /* Use viewport width for font size */
-  font-weight: 400;
-  line-height: 1.2; /* Use unitless value for line height */
-  text-align: justify; /* Justify text */
-  z-index: 15;
-  margin: 3vh 40px; /* Add top and right margin */
-  overflow-wrap: break-word; /* Break words to prevent overflow */
+  width: 65%;
 }
 
 .MapsIcon {
-  width: 50px; /* Adjust as needed */
-  height: 50px; /* Adjust as needed */
-  margin: 10px 10px; /* Add left and right margin */
-  border-radius: 25%; /* Add rounded corners */
+  width: 50px;
+  height: 50px;
+  margin: 10px 10px;
+  border-radius: 25%;
 }
 
 .MapsIconContainer {
   display: flex;
   text-align: left;
-  margin: 40px; /* Add left margin */
+  margin: 40px;
 }
 
 .star {
   position: absolute;
-  top: 0px; /* Adjust this value to move the star icon closer or farther from the top */
-  right: 10px; /* Adjust this value to move the star icon closer or farther from the right side */
+  top: 0px;
+  right: 10px;
   background: none;
   border: none;
   cursor: pointer;
 }
 
 .star-rating-container {
-  position: relative; /* Add this line */
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -129,9 +116,9 @@ button {
 .rating-bar {
   display: flex;
   justify-content: center;
-  position: absolute; /* Add this line if it's not already there */
+  position: absolute;
   flex-direction: column;
-  gap: 0px; /* Adjust this value to control the space between the numbers */
+  gap: 0px;
   width: 100%;
   top: 50px;
   right: 85px;
@@ -140,23 +127,23 @@ button {
 .phone {
   position: absolute;
   top: 15px;
-  right: 80px; /* adjust as needed */
+  right: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px solid #fff; /* adjust color as needed */
+  border: 2px solid #fff;
   border-radius: 50%;
-  width: 40px; /* adjust size as needed */
-  height: 40px; /* adjust size as needed */
+  width: 40px;
+  height: 40px;
 }
 
 .icon-container {
   position: absolute;
-  right: 0; /* Position the container to the right */
+  right: 0;
   display: flex;
-  align-items: center; /* Align items vertically */
-  top: 40%; /* Position the container vertically centered */
-  transform: translateY(-50%); /* Adjust for vertical centering */
+  align-items: center;
+  top: 40%;
+  transform: translateY(-50%);
 }
 
 .info {
@@ -165,24 +152,24 @@ button {
   background-color: rgba(255, 255, 255, 0.1);
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
-  max-width: 400px; /* Max width for the info container */
-  margin: auto; /* Center the container */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: auto;
 }
 
 .info-item {
-  margin-bottom: 10px; /* Space between items */
+  margin-bottom: 10px;
 }
 
 .info-item label {
-  display: block; /* Ensure labels are block level for better alignment */
-  margin-bottom: 5px; /* Space between label and input */
-  font-weight: bold; /* Make labels bold */
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
 }
 
 .info-item input {
-  width: 100%; /* Full width inputs */
-  padding: 8px; /* Padding for input */
-  border: 1px solid #ccc; /* Border for inputs */
-  border-radius: 4px; /* Rounded corners for inputs */
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }

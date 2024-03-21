@@ -1,20 +1,19 @@
 .profile-container {
-    width: 90%;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    text-align: center;
-  }
-  
-  .profile-icon {
-    font-size: 48px;
-    
-  }
-  
+  width: 90%;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.profile-icon {
+  font-size: 48px;
+}
+
 .sign-out-button {
   position: absolute;
-  top: 55px;
+  top: 35px;
   left: 20px;
   padding: 10px 20px;
   font-size: 14px;
@@ -23,33 +22,29 @@
   border: none;
   border-radius: 25px;
   cursor: pointer;
-  
 }
-  .profile-name {
-    font-size: 24px;
-    font-weight: bold;
-    margin: 10px 0;
-  }
-  
-  .profile-info {
-    margin: 5px 0;
-    font-size: 16px;
-    
-  }
-  
-  .profile-bio {
-    margin-top: 10px;
-    font-style: italic;
-    
-    
-  }
-  .button-auth {
-    background-color: #7D4BDB;
-    color: #FFFFFF;
-    border: none;
-    border-radius: 10px;
-    margin-top: 2rem;
-    cursor: pointer;
-    
-  }
-  
+
+.profile-name {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.profile-info {
+  margin: 5px 0;
+  font-size: 16px;
+}
+
+.profile-bio {
+  margin-top: 10px;
+  font-style: italic;
+}
+
+.button-auth {
+  background-color: #7D4BDB;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 10px;
+  margin-top: 2rem;
+  cursor: pointer;
+}

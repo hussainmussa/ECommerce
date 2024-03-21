@@ -1,17 +1,17 @@
 /* Contractor.css */
+
 .BG-container {
-  height: 100vh; /* Set the height of the container to full viewport height */
+  height: 100vh;
 }
 
 .contractor-container {
-  max-width: 600px; /* Set a max-width to prevent the content from becoming too wide */
-  max-height: 100%;
-  margin: 0 auto; /* Center the container horizontally */
-  
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .form-field {
   margin-bottom: 15px;
+  font-family: "Inter-Regular", Helvetica;
 }
 
 .input-container {
@@ -19,52 +19,29 @@
 }
 
 .input1 {
-  width: calc(100% - 20px); /* Adjusted width to accommodate error message */
- 
-}
-
-.error-message {
-  position: absolute;
-  bottom: -20px; /* Adjusted position to move the error message inside the input box */
-  margin-left: 40px;
-  margin-bottom: 5px;
-  color: red;
-  font-size: 12px; /* Adjust font size if needed */
-}
-
-
-
-
-.form-field {
-  margin-bottom: 15px;
-  font-family: "Inter-Regular", Helvetica;
-  
-}
-
-.label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.input1 {
-  width: 80%; /* Reduce this to make the input field narrower */
-  padding: 8px 15px; /* Increase this to make the input field wider */
+  width: calc(100% - 20px);
+  padding: 8px 15px;
   border: 1px solid #ccc;
   border-radius: 8px;
   box-sizing: border-box;
   font-size: 15px;
-  font-family: "Inter-Regular", Helvetica; /* Add this line to change the font */
-  margin: 0 auto; /* Center the input field */
-  display: block; /* Needed for margin: 0 auto to work */
+  font-family: "Inter-Regular", Helvetica;
 }
 
+.error-message {
+  position: absolute;
+  bottom: -20px;
+  margin-left: 40px;
+  margin-bottom: 5px;
+  color: red;
+  font-size: 12px;
+}
 
-.button1{
-  background-color: #7D4BDB;
-  color: #FFFFFF;
+.button1 {
+  background-color: #7d4bdb;
+  color: #ffffff;
   border: none;
   border-radius: 15px;
   cursor: pointer;
   margin-bottom: 50px;
-  
 }

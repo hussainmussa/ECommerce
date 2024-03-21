@@ -9,8 +9,8 @@
   }
   
   .image-container {
-    width: auto; /* or set a specific width */
-    height: 200px; /* adjust as needed */
+    width: auto; 
+    height: 200px; 
   }
   
   .welcome-text {

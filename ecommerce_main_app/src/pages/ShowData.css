@@ -1,6 +1,5 @@
 /* ShowData.css */
 .data-container {
-  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
@@ -11,33 +10,32 @@
 .data-card {
   flex: 0 0 auto;
   margin: 15px;
-  display: flex;
   flex-direction: column;
   align-items: start;
   justify-content: center;
   border: none;
-  width: 90%; /* Adjust card width as needed */
+  width: 90%; 
   max-height: 91vh;
   border-radius: 10px;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .data-card-container {
-  display: flex;
   flex-wrap: wrap;
   justify-content: center;
   width: 105%;
   min-height: 450px;
-  max-height: 580px; /* Set a specific height */
-  overflow-y: auto; /* Enable vertical scrolling */
+  max-height: 580px; 
+  overflow-y: auto; 
 }
 
 .data-image {
   border-radius: 10px 0px 0px 10px;
   margin-right: 20px;
-  width: 130px; /* adjust as needed */
-  height: 130px; /* adjust as needed */
+  width: 130px; 
+  height: 130px; 
 }
 
 .data-card:hover {
@@ -74,28 +72,21 @@
   gap: 10px;
 }
 
-.title-search-container input {
-  width: 60%; /* adjust as needed */
-  height: 50px; /* adjust as needed */
-  border-radius: 12px; /* adjust as needed */
-  padding: 0 20px; /* adjust as needed */
-  font-size: 20px; /* adjust as needed */
+.title-search-container input,
+.title-search-container select {
+  width: 60%; 
+  height: 50px; 
+  border-radius: 12px;
+  padding: 0 20px; 
+  font-size: 20px;
   border: none;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
   font-family: "Inter-Regular", Helvetica;
 }
 
 .title-search-container select {
-  width: 30%; /* adjust as needed */
-  height: 40px; /* adjust as needed */
-  border-radius: 12px; /* adjust as needed */
-  padding: 0 20px; /* adjust as needed */
-  font-size: 20px; /* adjust as needed */
-  border: none;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
-  font-family: "Inter-Regular", Helvetica;
-  appearance: none; /* remove default select arrow */
-  background-color: white;
-  margin-top: 20px; /* adjust as needed */
-  line-height: 35px; /* Center text vertically */
+  width: 30%; 
+  height: 40px; 
+  margin-top: 20px; 
+  line-height: 35px;
 }
